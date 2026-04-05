@@ -1,0 +1,321 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const timeline = [
+  {
+    year: '2010',
+    titleZh: '公司创立',
+    titleEn: 'Founded',
+    descZh: '在深圳成立，专注于保偏光纤产品研发与生产。',
+    descEn: 'Founded in Shenzhen, focused on PM fiber product R&D and manufacturing.',
+  },
+  {
+    year: '2013',
+    titleZh: '产品线扩展',
+    titleEn: 'Product Expansion',
+    descZh: '推出高密度MPO系列产品，进入数据中心市场。',
+    descEn: 'Launched high-density MPO series, entering the data center market.',
+  },
+  {
+    year: '2016',
+    titleZh: 'ISO 9001认证',
+    titleEn: 'ISO 9001 Certified',
+    descZh: '通过ISO 9001质量管理体系认证，产品进入欧美市场。',
+    descEn: 'ISO 9001 certified; products entered European and American markets.',
+  },
+  {
+    year: '2020',
+    titleZh: '测试仪器业务',
+    titleEn: 'Test Instruments',
+    descZh: '推出自主品牌OTDR测试解决方案，完善产品生态。',
+    descEn: 'Launched proprietary OTDR test solutions, completing the product ecosystem.',
+  },
+  {
+    year: '2024',
+    titleZh: '全球50+国家',
+    titleEn: '50+ Countries',
+    descZh: '产品销往全球50余个国家和地区，年出口额持续增长。',
+    descEn: 'Products exported to 50+ countries and regions with continuously growing annual revenue.',
+  },
+];
+
+const caseStudies = [
+  {
+    flag: '🇩🇪',
+    country: lang === 'en' ? 'Germany' : '德国',
+    industry: lang === 'en' ? 'Fiber Laser R&D' : '光纤激光研究',
+    clientType: lang === 'en' ? 'University Research Lab' : '大学研究实验室',
+    challenge: lang === 'en'
+      ? 'Required PM1550 patch cords with extinction ratio ≥ 30 dB for a high-power femtosecond laser experiment. Previous supplier\'s products exhibited inconsistent ER values causing experiment failures.'
+      : '飞秒激光实验要求消光比 ≥ 30 dB 的 PM1550 跳线，原供应商产品消光比不稳定，导致实验失败。',
+    solution: lang === 'en'
+      ? 'Supplied armored PM1550 patch cords, 100% individually tested for ER ≥ 30 dB before shipment. Delivered 20 units within 5 business days.'
+      : '供应铠装 PM1550 跳线，出货前逐只测试确保 ER ≥ 30 dB，20 根产品 5 个工作日发货。',
+    result: lang === 'en' ? 'Experiment success rate improved from 60% → 98%' : '实验成功率从 60% 提升至 98%',
+    resultColor: 'text-green-600',
+  },
+  {
+    flag: '🇺🇸',
+    country: lang === 'en' ? 'United States' : '美国',
+    industry: lang === 'en' ? 'Data Center' : '数据中心',
+    clientType: lang === 'en' ? 'Cloud Service Provider' : '云服务提供商',
+    challenge: lang === 'en'
+      ? 'Needed to upgrade 2,000 MPO-12 patch cords across 4 data centers simultaneously, with tight budget constraints and a 3-week delivery window.'
+      : '需要在 3 周内同步升级 4 个数据中心共 2000 根 MPO-12 跳线，预算有限。',
+    solution: lang === 'en'
+      ? 'Provided Type-B polarity MPO-12 patch cords with OFNR jacket. Bulk pricing with factory-direct shipment in two batches to match their installation schedule.'
+      : '提供 B 型极性 MPO-12 OFNR 跳线，工厂直发批量价，两批发货配合客户施工进度。',
+    result: lang === 'en' ? '30% cost reduction vs. previous US supplier' : '比原美国供应商节省 30% 采购成本',
+    resultColor: 'text-blue-600',
+  },
+  {
+    flag: '🇯🇵',
+    country: lang === 'en' ? 'Japan' : '日本',
+    industry: lang === 'en' ? 'Quantum Computing' : '量子计算',
+    clientType: lang === 'en' ? 'National Research Institute' : '国家研究机构',
+    challenge: lang === 'en'
+      ? 'Required ultra-low insertion loss PM980 patch cords for photon entanglement experiments. IL < 0.2 dB with full test report per unit.'
+      : '光子纠缠实验要求 PM980 跳线插损 < 0.2 dB，且每根附完整测试报告。',
+    solution: lang === 'en'
+      ? 'Delivered 50 units of PM980 LC/APC patch cords, each with individual OTDR and IL test certificate. Average IL achieved: 0.15 dB.'
+      : '交付 50 根 PM980 LC/APC 跳线，每根附独立 OTDR 及插损测试证书，平均插损达到 0.15 dB。',
+    result: lang === 'en' ? 'Passed all acceptance tests; ongoing supply for 3 years' : '验收全部通过，已持续供货 3 年',
+    resultColor: 'text-purple-600',
+  },
+  {
+    flag: '🇬🇧',
+    country: lang === 'en' ? 'United Kingdom' : '英国',
+    industry: lang === 'en' ? 'Telecom OEM' : '电信OEM',
+    clientType: lang === 'en' ? 'Network Equipment Manufacturer' : '网络设备制造商',
+    challenge: lang === 'en'
+      ? 'Needed a reliable OEM supplier for FC/APC simplex patch cords meeting Telcordia GR-326. Monthly volume 5,000+ units with consistent quality.'
+      : '需要符合 Telcordia GR-326 的 FC/APC 单芯跳线 OEM 供应商，月需求量 5000+ 根，质量要稳定。',
+    solution: lang === 'en'
+      ? 'Set up a dedicated production line with batch-by-batch sampling QC. Custom labeling and packaging to client\'s brand specifications.'
+      : '设立专属生产线，批次抽检 QC，按客户品牌规格定制贴标和包装。',
+    result: lang === 'en' ? 'Zero defect returns in 18 months of cooperation' : '合作 18 个月零不良品退货',
+    resultColor: 'text-orange-600',
+  },
+];
+
+const team = [
+  { name: 'Dr. Chen Wei', roleZh: '首席技术官', roleEn: 'Chief Technology Officer', emoji: '👨‍🔬' },
+  { name: 'Lisa Zhang', roleZh: '销售总监', roleEn: 'Sales Director', emoji: '👩‍💼' },
+  { name: 'Mark Liu', roleZh: '质量总监', roleEn: 'Quality Director', emoji: '👨‍💼' },
+  { name: 'Amy Wang', roleZh: '产品经理', roleEn: 'Product Manager', emoji: '👩‍💻' },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'About FiberLink – PM Fiber Optic Solutions' : '关于我们 – FiberLink 光纤跳线专家'}
+  description={lang === 'en'
+    ? 'FiberLink is a professional fiber optic manufacturer with 10+ years of experience, serving 50+ countries worldwide.'
+    : 'FiberLink是专业光纤跳线制造商，拥有10+年行业经验，产品销往全球50+国家。'}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        {lang === 'en' ? 'About FiberLink' : '关于 FiberLink'}
+      </h1>
+      <p class="text-xl text-blue-200 max-w-2xl mx-auto">
+        {lang === 'en'
+          ? 'Dedicated Fiber Optic Interconnect Solutions Since 2010'
+          : '自2010年起，专注光纤互联解决方案'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">
+            {lang === 'en' ? 'Our Mission' : '我们的使命'}
+          </h2>
+          <p class="text-gray-600 leading-relaxed mb-4">
+            {lang === 'en'
+              ? 'FiberLink Technology is committed to delivering premium fiber optic interconnect solutions that empower scientists, engineers, and system integrators worldwide. We combine deep materials expertise with rigorous quality control to provide products that meet the most demanding specifications.'
+              : 'FiberLink Technology致力于为全球科学家、工程师和系统集成商提供高品质光纤互联解决方案。我们将深厚的材料专业知识与严格的质量控制相结合，提供满足最苛刻规格要求的产品。'}
+          </p>
+          <p class="text-gray-600 leading-relaxed">
+            {lang === 'en'
+              ? 'From precision PM fiber patch cords for quantum computing research to high-density MPO systems for cloud data centers, our solutions power the world\'s most advanced optical systems.'
+              : '从量子计算研究用精密保偏跳线，到云数据中心用高密度MPO系统，我们的解决方案驱动着世界上最先进的光学系统。'}
+          </p>
+        </div>
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { num: '10+', labelZh: '年行业经验', labelEn: 'Years Experience' },
+            { num: '50+', labelZh: '服务国家', labelEn: 'Countries Served' },
+            { num: '5000+', labelZh: '产品型号', labelEn: 'Product Models' },
+            { num: '100%', labelZh: '出货前检测', labelEn: 'Pre-ship Testing' },
+          ].map(stat => (
+            <div class="bg-brand-blue-light rounded-2xl p-6 text-center">
+              <div class="text-3xl font-bold text-brand-blue mb-1">{stat.num}</div>
+              <div class="text-sm text-gray-600">{lang === 'en' ? stat.labelEn : stat.labelZh}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center text-gray-900 mb-8">
+        {lang === 'en' ? 'Certifications & Standards' : '认证与标准'}
+      </h2>
+      <div class="flex flex-wrap justify-center gap-6">
+        {['ISO 9001:2015', 'CE', 'RoHS', 'IEC 61300', 'Telcordia GR-326', 'MIL-SPEC'].map(cert => (
+          <div class="bg-white rounded-xl px-6 py-4 shadow-sm border border-gray-100 text-center">
+            <div class="text-2xl mb-1">🏅</div>
+            <div class="font-semibold text-gray-800 text-sm">{cert}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+        {lang === 'en' ? 'Our Journey' : '发展历程'}
+      </h2>
+      <div class="relative">
+        <!-- Vertical line -->
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-brand-blue-light hidden md:block" />
+        <div class="space-y-8">
+          {timeline.map((item, idx) => (
+            <div class="flex items-start gap-6">
+              <div class="flex-shrink-0 w-16 h-16 bg-brand-blue text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg z-10">
+                {item.year}
+              </div>
+              <div class="flex-1 bg-gray-50 rounded-xl p-5 shadow-sm">
+                <h3 class="font-bold text-gray-900 mb-1">
+                  {lang === 'en' ? item.titleEn : item.titleZh}
+                </h3>
+                <p class="text-gray-600 text-sm">
+                  {lang === 'en' ? item.descEn : item.descZh}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+        {lang === 'en' ? 'Our Team' : '核心团队'}
+      </h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {team.map(member => (
+          <div class="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+            <div class="text-5xl mb-3">{member.emoji}</div>
+            <div class="font-bold text-gray-900 mb-1">{member.name}</div>
+            <div class="text-sm text-brand-blue">{lang === 'en' ? member.roleEn : member.roleZh}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 海外客户案例 -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">
+          {lang === 'en' ? 'Customer Case Studies' : '海外客户案例'}
+        </h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">
+          {lang === 'en'
+            ? 'Real challenges, real solutions. Here\'s how we\'ve helped clients in different industries.'
+            : '真实的问题，真实的解决方案——我们如何帮助不同行业的海外客户。'}
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {caseStudies.map(c => (
+          <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+            <!-- Case header -->
+            <div class="bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4 flex items-center justify-between border-b border-gray-100">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">{c.flag}</span>
+                <div>
+                  <div class="font-bold text-gray-900">{c.country}</div>
+                  <div class="text-xs text-gray-500">{c.industry}</div>
+                </div>
+              </div>
+              <span class="text-xs bg-brand-blue text-white px-2 py-1 rounded-full">{c.clientType}</span>
+            </div>
+            <!-- Case body -->
+            <div class="p-6 space-y-4">
+              <div>
+                <div class="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">
+                  {lang === 'en' ? '⚠ Challenge' : '⚠ 面临挑战'}
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed">{c.challenge}</p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-blue-500 uppercase tracking-wide mb-1">
+                  {lang === 'en' ? '✦ Solution' : '✦ 我们的方案'}
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed">{c.solution}</p>
+              </div>
+              <div class="bg-green-50 rounded-lg px-4 py-3 flex items-center gap-2">
+                <span class="text-lg">✅</span>
+                <span class={`font-semibold text-sm ${c.resultColor}`}>{c.result}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- 底部引导 -->
+      <div class="mt-10 text-center">
+        <p class="text-gray-500 mb-4">
+          {lang === 'en'
+            ? 'Have a similar challenge? Tell us your requirements and we\'ll design the solution.'
+            : '有类似的需求？告诉我们您的挑战，我们来设计解决方案。'}
+        </p>
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-dark transition-colors"
+        >
+          {lang === 'en' ? '💬 Discuss My Requirements' : '💬 讨论我的需求'}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-brand-blue text-white">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">
+        {lang === 'en' ? "Let's Work Together" : '携手合作'}
+      </h2>
+      <p class="text-blue-100 mb-8">
+        {lang === 'en'
+          ? 'Whether you need standard products or fully custom solutions, our team is ready to help.'
+          : '无论您需要标准产品还是完全定制解决方案，我们的团队随时准备提供支持。'}
+      </p>
+      <button
+        onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors"
+      >
+        {lang === 'en' ? '📧 Contact Us Now' : '📧 立即联系我们'}
+      </button>
+    </div>
+  </section>
+</Layout>

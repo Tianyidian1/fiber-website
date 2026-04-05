@@ -1,0 +1,44 @@
+---
+import { useTranslations, getLocalizedPath } from '../../i18n/index';
+
+export interface Props {
+  lang: string;
+  current?: string;
+  items?: Array<{ label: string; href?: string }>;
+}
+
+const { lang, current, items = [] } = Astro.props;
+const t = useTranslations(lang as any);
+---
+
+<nav class="bg-gray-50 border-b border-gray-200 py-2.5">
+  <div class="max-w-7xl mx-auto px-4">
+    <ol class="flex flex-wrap items-center gap-1 text-sm text-gray-500">
+      <li>
+        <a href={getLocalizedPath('/', lang)} class="hover:text-brand-blue transition-colors">
+          {t('breadcrumb.home')}
+        </a>
+      </li>
+      {items.map(item => (
+        <>
+          <li class="text-gray-300">/</li>
+          <li>
+            {item.href ? (
+              <a href={getLocalizedPath(item.href, lang)} class="hover:text-brand-blue transition-colors">
+                {item.label}
+              </a>
+            ) : (
+              <span class="text-gray-700 font-medium">{item.label}</span>
+            )}
+          </li>
+        </>
+      ))}
+      {current && (
+        <>
+          <li class="text-gray-300">/</li>
+          <li class="text-gray-900 font-medium truncate max-w-xs">{current}</li>
+        </>
+      )}
+    </ol>
+  </div>
+</nav>

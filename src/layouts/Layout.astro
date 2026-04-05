@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+import Header from '../components/ui/Header.astro';
+import Footer from '../components/ui/Footer.astro';
+import InquiryModal from '../components/ui/InquiryModal.tsx';
+import { getLangFromUrl } from '../i18n/index';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  productModel?: string;
+  schema?: object | object[];  // 结构化数据 JSON-LD
+}
+
+const { title, description = '专业光纤跳线解决方案，提供保偏跳线、高密度MPO、测试方案及特种跳线产品', image = '/images/og-default.jpg', productModel, schema } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang={lang === 'en' ? 'en' : 'zh-CN'}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.site)} />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- hreflang for bilingual -->
+  <link rel="alternate" hreflang="zh-CN" href={new URL(Astro.url.pathname.replace(/^\/en/, ''), Astro.site)} />
+  <link rel="alternate" hreflang="en" href={new URL('/en' + Astro.url.pathname.replace(/^\/en/, ''), Astro.site)} />
+
+  <!-- JSON-LD 结构化数据（AI 搜索引擎优化） -->
+  {schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(Array.isArray(schema) ? schema : [schema])} />
+  )}
+</head>
+<body class="min-h-screen flex flex-col bg-white">
+  <Header lang={lang} />
+  <main class="flex-1">
+    <slot />
+  </main>
+  <Footer lang={lang} />
+  <InquiryModal client:load defaultProduct={productModel} lang={lang} />
+</body>
+</html>

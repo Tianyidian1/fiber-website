@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import { getLangFromUrl, getLocalizedPath } from '../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+
+const solutions = [
+  {
+    id: 'fiber-laser-system',
+    title: '光纤激光系统完整解决方案',
+    icon: '🔵',
+    desc: '从保偏光纤跳线到高功率激光传能，为光纤激光器制造商提供一站式器件供应。',
+    components: ['保偏跳线（PANDA/PM）', '高功率激光传能跳线', 'FC/APC、LC/APC 连接器'],
+    applications: ['光纤激光器', '激光切割/焊接', '医疗激光设备', '科研实验'],
+    color: 'from-blue-500 to-blue-600',
+  },
+  {
+    id: 'high-density-connectivity',
+    title: '高密度数据中心互联方案',
+    icon: '🔲',
+    desc: 'MPO多芯跳线配合MT模块，实现数据中心机架密度的极致优化。',
+    components: ['MPO 12芯/24芯跳线', 'MPO转LC扇出跳线', 'MT-8/MT-12连接模块', '预端接光缆'],
+    applications: ['数据中心', '云服务器机房', '高性能计算集群', '5G基站'],
+    color: 'from-indigo-500 to-purple-600',
+  },
+  {
+    id: 'test-measurement',
+    title: '光纤测试与运维解决方案',
+    icon: '🔬',
+    desc: '提供完整的光纤网络测试方案，从故障定位到系统验收，覆盖工程全流程。',
+    components: ['手持式OTDR', '模块化OTDR', '光纤跳线测试套件', '光功率计与光源'],
+    applications: ['光纤网络建设', '线路故障定位', '系统验收测试', '定期运维检测'],
+    color: 'from-teal-500 to-cyan-600',
+  },
+  {
+    id: 'sensing-quantum',
+    title: '光纤传感与量子通信方案',
+    icon: '💎',
+    desc: '高精度保偏跳线与特种光纤组件，满足前沿传感和量子通信的严苛要求。',
+    components: ['高消光比保偏跳线', '相位调制跳线', '量子通信专用跳线', '抗辐照跳线'],
+    applications: ['光纤陀螺', '分布式光纤传感', '量子密钥分发', '量子计算'],
+    color: 'from-pink-500 to-rose-600',
+  },
+];
+---
+
+<Layout
+  title="解决方案 | FiberLink 光纤跳线"
+  description="从保偏跳线、MPO组件到OTDR测试方案，FiberLink为客户提供从器件到测试的完整能力。"
+>
+  <Breadcrumb lang={lang} currentPage="解决方案" />
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-slate-900 via-brand-blue to-slate-800 text-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">完整解决方案</h1>
+        <p class="text-xl text-blue-100 mb-8">
+          从器件到测试，我们为客户提供端到端的光纤互联能力
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <button
+            onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+            class="inline-flex items-center gap-2 px-8 py-3 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            获取方案咨询
+          </button>
+          <a
+            href={getLocalizedPath('/contact', lang)}
+            class="inline-flex items-center gap-2 px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
+          >
+            联系技术支持
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions List -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="space-y-12">
+        {solutions.map((sol, index) => (
+          <div class={`flex flex-col ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} gap-8 items-center`}>
+            <div class="flex-1">
+              <div class={`bg-gradient-to-br ${sol.color} rounded-2xl p-8 text-white`}>
+                <div class="text-6xl mb-4">{sol.icon}</div>
+                <h2 class="text-3xl font-bold mb-4">{sol.title}</h2>
+                <p class="text-lg text-blue-50 mb-6">{sol.desc}</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h3 class="font-semibold mb-2 flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                      核心组件
+                    </h3>
+                    <ul class="space-y-1">
+                      {sol.components.map(c => (
+                        <li class="text-sm flex items-center gap-2">
+                          <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold mb-2 flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      应用场景
+                    </h3>
+                    <ul class="space-y-1">
+                      {sol.applications.map(a => (
+                        <li class="text-sm flex items-center gap-2">
+                          <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                          {a}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="bg-gray-50 rounded-2xl p-8">
+                <h3 class="font-bold text-gray-900 text-xl mb-4">方案优势</h3>
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">一站式供应</h4>
+                      <p class="text-sm text-gray-600">无需多个供应商，我们提供完整的产品组合</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">技术支持</h4>
+                      <p class="text-sm text-gray-600">工程师团队提供从设计到测试的全程技术支持</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">样品测试</h4>
+                      <p class="text-sm text-gray-600">支持样品申请，让您在实际场景中验证产品性能</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <button
+                    onclick={`document.dispatchEvent(new CustomEvent('open-inquiry', {detail:{product:'${sol.title}'}}))`}
+                    class="w-full py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-dark transition-colors"
+                  >
+                    询价此方案
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">找不到您需要的方案？</h2>
+      <p class="text-blue-100 text-lg mb-4">
+        我们提供更全面的定制化解决方案，根据您的具体需求设计专属产品组合
+      </p>
+      <p class="text-blue-200 text-sm mb-8">
+        支持从产品设计、技术方案到批量生产的一站式服务
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          提交定制需求
+        </button>
+        <a
+          href={getLocalizedPath('/contact', lang)}
+          class="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
+        >
+          联系工程师
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

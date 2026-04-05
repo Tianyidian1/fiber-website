@@ -1,0 +1,118 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+
+const t = (key: string) => {
+  const en: Record<string, string> = {
+    'title': 'Specialty Fiber Optic Cables',
+    'subtitle': 'High-Power · Laser Delivery · Dual-Window · Harsh Environment',
+    'breadcrumb.products': 'Products',
+    'breadcrumb.current': 'Specialty Cables',
+    'coreLoss': 'Core Loss',
+    'powerRating': 'Power Rating',
+    'wavelength': 'Wavelength',
+    'jacket': 'Jacket',
+    'length': 'Length',
+    'inquire': 'Inquire Now',
+    'new': 'New',
+    'laser.title': 'PM Laser Delivery Patch Cord',
+    'laser.desc': 'Polarization-maintaining fiber for precision laser systems',
+    'highPower.title': 'High-Power Energy Cable',
+    'highPower.desc': 'Supports up to 10kW continuous transmission',
+    'dualWindow.title': 'Dual-Window Patch Cord',
+    'dualWindow.desc': '1310nm + 1550nm wavelengths in one cable',
+    'harsh.title': 'Armored Harsh Environment Cable',
+    'harsh.desc': 'IP67 waterproof, crush-resistant stainless steel armor',
+  };
+  return en[key] || key;
+};
+
+const products = [
+  {
+    icon: '🔆',
+    name: t('laser.title'),
+    model: 'SPL-PM-1',
+    spec: { 'Core Loss': '<0.2dB', 'Power Rating': '5W', 'Wavelength': '1064nm', 'Jacket': 'PVC 0.9mm', 'Length': '1-10m' },
+    desc: t('laser.desc'),
+    badge: t('new'),
+  },
+  {
+    icon: '⚡',
+    name: t('highPower.title'),
+    model: 'SPL-HP-2',
+    spec: { 'Core Loss': '<0.5dB', 'Power Rating': '10kW', 'Wavelength': '1064nm', 'Jacket': 'Stainless Steel', 'Length': 'Custom' },
+    desc: t('highPower.desc'),
+  },
+  {
+    icon: '🌊',
+    name: t('dualWindow.title'),
+    model: 'SPL-DW-3',
+    spec: { 'Core Loss': '<0.3dB', 'Wavelength': '1310/1550nm', 'Connectors': 'LC/UPC', 'Jacket': 'LSZH 2.0mm', 'Length': 'Custom' },
+    desc: t('dualWindow.desc'),
+  },
+  {
+    icon: '🛡️',
+    name: t('harsh.title'),
+    model: 'SPL-AE-4',
+    spec: { 'Core Loss': '<0.35dB', 'Power Rating': '500W', 'Wavelength': '1310/1550nm', 'Jacket': 'SS Armor', 'Length': 'Custom' },
+    desc: t('harsh.desc'),
+  },
+];
+---
+
+<Layout
+  title="Specialty Fiber Optic Cables – FiberLink"
+  description="High-power, laser delivery, and harsh environment specialty fiber optic cables."
+>
+  <Breadcrumb lang="en" items={[{ label: t('breadcrumb.products'), href: '/en/' }]} current={t('breadcrumb.current')} />
+
+  <section class="bg-gradient-to-r from-amber-700 to-orange-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4">
+        <span class="text-4xl">🔧</span>
+        <div>
+          <h1 class="text-3xl font-bold">{t('title')}</h1>
+          <p class="text-amber-200 mt-1">{t('subtitle')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {products.map(p => (
+          <div class="product-card">
+            <div class="bg-gradient-to-br from-amber-50 to-orange-100 p-8 flex justify-center">
+              <span class="text-6xl">{p.icon}</span>
+            </div>
+            <div class="p-5">
+              {p.badge && <span class="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full font-medium mb-2 inline-block">{p.badge}</span>}
+              <div class="text-xs text-gray-400 font-mono mb-1">{p.model}</div>
+              <h3 class="font-bold text-gray-900 mb-1">{p.name}</h3>
+              <p class="text-xs text-gray-600 mb-3">{p.desc}</p>
+              <div class="overflow-x-auto mb-4">
+                <table class="w-full text-xs">
+                  <tbody>
+                    {Object.entries(p.spec).map(([k, v]) => (
+                      <tr class="border-b border-gray-100">
+                        <td class="py-1.5 pr-3 text-gray-500 font-medium whitespace-nowrap">{k}</td>
+                        <td class="py-1.5 text-gray-800">{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <button
+                onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${p.model}'}}))`}
+                class="w-full py-2.5 bg-amber-600 text-white text-sm font-medium rounded hover:bg-amber-700 transition-colors"
+              >
+                {t('inquire')}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,204 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeroBanner from '../../components/home/HeroBanner.tsx';
+import { getLangFromUrl, getLocalizedPath } from '../../i18n/index';
+
+// Force English locale for this page
+const lang = 'en';
+
+const banners = [
+  {
+    title: 'Panda PM Fiber Patch Cord',
+    subtitle: 'Polarization Maintaining',
+    desc: 'Ultra-low insertion loss <0.3dB, high extinction ratio 25-30dB. Ideal for fiber laser, sensing, and quantum communication.',
+    btnText: 'Inquire Now',
+    btnHref: '/en/products/pm-patch-cord',
+    bg: 'bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800',
+    accent: 'bg-blue-500/30 text-blue-100',
+    image: '🔵',
+  },
+  {
+    title: 'MPO High-Density Fiber Cable',
+    subtitle: 'High Density',
+    desc: '12/24-fiber MPO cables, Type A/B/C polarity. Replace multiple traditional patch cords to boost rack density.',
+    btnText: 'Learn More',
+    btnHref: '/en/products/high-density',
+    bg: 'bg-gradient-to-br from-indigo-700 via-purple-600 to-indigo-800',
+    accent: 'bg-indigo-500/30 text-indigo-100',
+    image: '🔲',
+  },
+  {
+    title: 'Handheld OTDR Test Solution',
+    subtitle: 'Test & Measurement',
+    desc: 'Precision fault location for fiber networks. Handheld & modular OTDR for field and lab applications.',
+    btnText: 'View Products',
+    btnHref: '/en/products/test-solutions',
+    bg: 'bg-gradient-to-br from-teal-700 via-cyan-600 to-teal-800',
+    accent: 'bg-teal-500/30 text-teal-100',
+    image: '🔬',
+  },
+  {
+    title: 'High-Power Laser Delivery Cable',
+    subtitle: 'Specialty Applications',
+    desc: 'Engineered for high-power laser delivery and cutting-edge photonic systems. Robust, reliable, and precise.',
+    btnText: 'Get Quote',
+    btnHref: '/en/products/specialty',
+    bg: 'bg-gradient-to-br from-orange-600 via-red-500 to-orange-700',
+    accent: 'bg-orange-500/30 text-orange-100',
+    image: '⚡',
+  },
+];
+
+const productCategories = [
+  {
+    icon: '🔵',
+    title: 'PM Patch Cords',
+    desc: 'Panda PM fiber with ultra-low insertion loss <0.3dB and high extinction ratio for fiber laser and sensing.',
+    href: '/en/products/pm-patch-cord',
+    features: ['Extinction Ratio: 25/30dB', 'Diameter: 0.9/2.0/3.0mm', 'Connector: LC/SC/FC/ST'],
+    color: 'border-blue-500',
+    iconBg: 'bg-blue-50',
+  },
+  {
+    icon: '🔲',
+    title: 'High-Density',
+    desc: 'MPO cables (12/24-fiber, Type A/B/C) and MT modules for maximum rack density.',
+    href: '/en/products/high-density',
+    features: ['12/24-fiber MPO', 'Type A/B/C polarity', 'MT-8/MT-12 modules'],
+    color: 'border-purple-500',
+    iconBg: 'bg-purple-50',
+  },
+  {
+    icon: '📡',
+    title: 'Test Solutions',
+    desc: 'Handheld and modular OTDR for precise fault location in fiber optic networks.',
+    href: '/en/products/test-solutions',
+    features: ['Handheld OTDR', 'Modular OTDR', 'Complete test kits'],
+    color: 'border-teal-500',
+    iconBg: 'bg-teal-50',
+  },
+  {
+    icon: '⚡',
+    title: 'Specialty Cables',
+    desc: 'PM laser and high-power delivery cables for industrial laser and photonic systems.',
+    href: '/en/products/specialty',
+    features: ['PM laser cables', 'High-power delivery', 'Custom specifications'],
+    color: 'border-orange-500',
+    iconBg: 'bg-orange-50',
+  },
+];
+
+const advantages = [
+  { icon: '📉', title: 'Ultra-Low Insertion Loss', desc: 'Insertion loss <0.3dB ensuring complete signal integrity for precision fiber systems.' },
+  { icon: '🚀', title: 'Fast Delivery', desc: 'Standard products ship in 3-5 days, custom in 7-14 days with worldwide logistics.' },
+  { icon: '🔧', title: 'Custom Capability', desc: 'OEM/ODM support for any length, connector combination, and special specifications.' },
+  { icon: '✅', title: 'Quality Assurance', desc: '100% batch testing with complete test reports, compliant with IEC standards.' },
+  { icon: '🌍', title: 'Global Service', desc: 'Serving 50+ countries with multi-language technical support.' },
+  { icon: '📋', title: 'Full Documentation', desc: 'Detailed datasheets, installation guides, CE/RoHS certificates for every product.' },
+];
+---
+
+<Layout
+  title="FiberLink – Professional Fiber Optic Patch Cord Solutions"
+  description="Professional fiber optic patch cord manufacturer. Specializing in PM patch cords, MPO high-density, OTDR test solutions, and specialty cables."
+>
+  <HeroBanner client:load banners={banners} inquireText="Inquire Now" learnText="Learn More" />
+
+  <!-- Order Notice Banner -->
+  <section class="bg-amber-50 border-b-4 border-amber-400">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm">
+        <span class="font-bold text-amber-700 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+          </svg>
+          ORDER NOTICE
+        </span>
+        <span class="text-amber-800">
+          We accept civilian orders only. No military or government contracts.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex flex-wrap justify-center md:justify-between items-center gap-4 text-sm text-gray-600">
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Sample Testing Supported</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> 100% Tested Before Shipment</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> Custom Solutions Available</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> 10+ Years Experience</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> 50+ Countries Served</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="section-title">Core Product Lines</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">Professional fiber optic solutions for industrial and telecom applications</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {productCategories.map(cat => (
+          <div class={`product-card border-t-4 ${cat.color}`}>
+            <div class={`${cat.iconBg} p-6 flex justify-center`}>
+              <span class="text-5xl">{cat.icon}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-gray-900 text-lg mb-2">{cat.title}</h3>
+              <p class="text-gray-500 text-sm mb-4 leading-relaxed">{cat.desc}</p>
+              <ul class="space-y-1 mb-5">
+                {cat.features.map(f => (
+                  <li class="flex items-center gap-2 text-xs text-gray-600">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-blue flex-shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div class="flex gap-2">
+                <a href={cat.href} class="flex-1 text-center py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-blue-dark transition-colors">View Details</a>
+                <button onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${cat.title}'}}))`} class="flex-1 text-center py-2 border border-brand-blue text-brand-blue text-sm font-medium rounded hover:bg-brand-blue hover:text-white transition-colors">Inquire</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="section-title">Why Choose Us</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {advantages.map(adv => (
+          <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div class="text-3xl mb-3">{adv.icon}</div>
+            <h3 class="font-bold text-gray-900 mb-2">{adv.title}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">{adv.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="text-blue-100 text-lg mb-8">Send us your requirements and our engineers will provide a professional solution within 24 hours.</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <button onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          Send Inquiry
+        </button>
+        <a href="/en/contact" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-brand-blue transition-colors text-sm">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,213 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { getLocalizedPath } from '../../i18n/index';
+
+const lang = 'en';
+
+const solutions = [
+  {
+    id: 'fiber-laser-system',
+    title: 'Fiber Laser System Solutions',
+    icon: '🔵',
+    desc: 'Complete component supply for fiber laser manufacturers, from PM patch cords to high-power laser delivery cables.',
+    components: ['PM Patch Cords (PANDA/PM)', 'High-Power Laser Delivery Cables', 'FC/APC, LC/APC Connectors'],
+    applications: ['Fiber Lasers', 'Laser Cutting/Welding', 'Medical Laser Equipment', 'Research Labs'],
+    color: 'from-blue-500 to-blue-600',
+  },
+  {
+    id: 'high-density-connectivity',
+    title: 'High-Density Data Center Solutions',
+    icon: '🔲',
+    desc: 'MPO multi-fiber cables with MT modules for ultimate rack density optimization in data centers.',
+    components: ['MPO 12/24-Fiber Cables', 'MPO to LC Fan-out Cables', 'MT-8/MT-12 Modules', 'Pre-terminated Cables'],
+    applications: ['Data Centers', 'Cloud Server Rooms', 'HPC Clusters', '5G Base Stations'],
+    color: 'from-indigo-500 to-purple-600',
+  },
+  {
+    id: 'test-measurement',
+    title: 'Fiber Test & O&M Solutions',
+    icon: '🔬',
+    desc: 'Complete fiber network testing solutions, from fault location to system acceptance, covering the full engineering workflow.',
+    components: ['Handheld OTDR', 'Modular OTDR', 'Fiber Patch Cord Test Kits', 'Optical Power Meters & Light Sources'],
+    applications: ['Fiber Network Construction', 'Line Fault Location', 'System Acceptance Testing', 'Regular O&M'],
+    color: 'from-teal-500 to-cyan-600',
+  },
+  {
+    id: 'sensing-quantum',
+    title: 'Fiber Sensing & Quantum Communication',
+    icon: '💎',
+    desc: 'High-precision PM patch cords and specialty fiber components for demanding sensing and quantum communication applications.',
+    components: ['High ER PM Patch Cords', 'Phase Modulation Cords', 'Quantum Communication Cords', 'Radiation-Resistant Cords'],
+    applications: ['Fiber Gyroscopes', 'Distributed Fiber Sensing', 'QKD Systems', 'Quantum Computing'],
+    color: 'from-pink-500 to-rose-600',
+  },
+];
+---
+
+<Layout
+  title="Solutions | FiberLink Fiber Optic Patch Cords"
+  description="From PM patch cords and MPO components to OTDR test solutions, FiberLink provides end-to-end fiber connectivity capabilities."
+>
+  <Breadcrumb lang={lang} currentPage="Solutions" />
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-br from-slate-900 via-brand-blue to-slate-800 text-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Complete Solutions</h1>
+        <p class="text-xl text-blue-100 mb-8">
+          From components to testing, we provide end-to-end fiber connectivity capabilities
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <button
+            onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+            class="inline-flex items-center gap-2 px-8 py-3 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Get Solution Consulting
+          </button>
+          <a
+            href={getLocalizedPath('/contact', lang)}
+            class="inline-flex items-center gap-2 px-8 py-3 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
+          >
+            Contact Technical Support
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions List -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="space-y-12">
+        {solutions.map((sol, index) => (
+          <div class={`flex flex-col ${index % 2 === 0 ? '' : 'md:flex-row-reverse'} gap-8 items-center`}>
+            <div class="flex-1">
+              <div class={`bg-gradient-to-br ${sol.color} rounded-2xl p-8 text-white`}>
+                <div class="text-6xl mb-4">{sol.icon}</div>
+                <h2 class="text-3xl font-bold mb-4">{sol.title}</h2>
+                <p class="text-lg text-blue-50 mb-6">{sol.desc}</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h3 class="font-semibold mb-2 flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                      Core Components
+                    </h3>
+                    <ul class="space-y-1">
+                      {sol.components.map(c => (
+                        <li class="text-sm flex items-center gap-2">
+                          <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold mb-2 flex items-center gap-2">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      Applications
+                    </h3>
+                    <ul class="space-y-1">
+                      {sol.applications.map(a => (
+                        <li class="text-sm flex items-center gap-2">
+                          <span class="w-1.5 h-1.5 bg-white rounded-full"></span>
+                          {a}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="bg-gray-50 rounded-2xl p-8">
+                <h3 class="font-bold text-gray-900 text-xl mb-4">Solution Benefits</h3>
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">One-Stop Supply</h4>
+                      <p class="text-sm text-gray-600">Complete product portfolio from a single supplier</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">Technical Support</h4>
+                      <p class="text-sm text-gray-600">Engineer team provides support from design to testing</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900 mb-1">Sample Testing</h4>
+                      <p class="text-sm text-gray-600">Sample requests supported to verify product performance in real scenarios</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-6">
+                  <button
+                    onclick={`document.dispatchEvent(new CustomEvent('open-inquiry', {detail:{product:'${sol.title}'}}))`}
+                    class="w-full py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-dark transition-colors"
+                  >
+                    Quote This Solution
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Can't Find Your Solution?</h2>
+      <p class="text-blue-100 text-lg mb-4">
+        We provide more comprehensive customized solutions, designing exclusive product combinations tailored to your specific needs
+      </p>
+      <p class="text-blue-200 text-sm mb-8">
+        One-stop service from product design and technical solutions to mass production
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Submit Custom Request
+        </button>
+        <a
+          href={getLocalizedPath('/contact', lang)}
+          class="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-brand-blue transition-colors"
+        >
+          Contact Engineers
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

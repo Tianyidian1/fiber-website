@@ -1,0 +1,102 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ContactForm from '../../../components/ui/ContactForm.tsx';
+
+const lang = 'en';
+
+const faqItems = [
+  { q: 'What is the minimum order quantity?', a: 'Standard products have no MOQ (MOQ=1). Custom products typically require 10-50pcs MOQ, subject to inquiry.' },
+  { q: 'What payment methods do you accept?', a: 'We accept T/T (wire transfer), PayPal, credit card (Stripe), and Western Union.' },
+  { q: 'Do you offer samples?', a: 'Yes, we offer product samples (usually at cost) so you can evaluate quality before placing a full order.' },
+  { q: 'What is the warranty period?', a: 'All products carry a 12-month warranty. Manufacturing defects will be repaired or replaced free of charge.' },
+  { q: 'Can you make custom specifications?', a: 'Yes! We support custom lengths (0.1m-100m), connector types, wavelengths, jacket colors, and special packaging.' },
+];
+---
+
+<Layout
+  title="Contact FiberLink – Get a Quote"
+  description="Contact FiberLink for product inquiries, custom orders, and technical support. We reply within 24 hours."
+>
+  <section class="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-3">Contact Us</h1>
+      <p class="text-blue-200 text-lg">Get a quote or technical support — we reply within 24 hours</p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div class="space-y-6">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+          <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+            <span class="text-2xl flex-shrink-0">📍</span>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm mb-1">Address</div>
+              <p class="text-gray-600 text-sm">No.1 Fiber Road, Shenzhen Science Park, Shenzhen, Guangdong, China 518057</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+            <span class="text-2xl flex-shrink-0">📞</span>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm mb-1">Phone</div>
+              <a href="tel:+86-400-000-0000" class="text-brand-blue hover:underline text-sm block">+86-400-000-0000</a>
+              <a href="tel:+86-755-0000-0000" class="text-brand-blue hover:underline text-sm block">+86-755-0000-0000</a>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+            <span class="text-2xl flex-shrink-0">📧</span>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm mb-1">Email</div>
+              <a href="mailto:info@fiberlink.com" class="text-brand-blue hover:underline text-sm block">info@fiberlink.com</a>
+              <a href="mailto:sales@fiberlink.com" class="text-brand-blue hover:underline text-sm block">sales@fiberlink.com</a>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+            <span class="text-2xl flex-shrink-0">🕐</span>
+            <div>
+              <div class="font-semibold text-gray-900 text-sm mb-1">Business Hours</div>
+              <p class="text-gray-600 text-sm">Monday-Friday 09:00-18:00 (UTC+8 Beijing Time)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <h2 class="text-xl font-bold text-gray-900 mb-6">Send Inquiry</h2>
+          <ContactForm client:load lang="en" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="rounded-2xl overflow-hidden h-64 bg-gray-200 flex items-center justify-center">
+        <div class="text-center text-gray-500">
+          <div class="text-4xl mb-2">🗺️</div>
+          <div class="text-sm font-medium">Shenzhen Science Park, Guangdong, China</div>
+          <div class="text-xs text-gray-400 mt-1">Google Maps embedded here</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-10">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqItems.map(faq => (
+          <details class="group bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
+            <summary class="flex items-center justify-between cursor-pointer px-6 py-4 font-medium text-gray-900 hover:bg-gray-100 transition-colors">
+              <span>{faq.q}</span>
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">{faq.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

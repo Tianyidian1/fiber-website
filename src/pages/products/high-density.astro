@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const subCategories = [
+  {
+    id: 'mpo-cables',
+    icon: '🔲',
+    titleZh: 'MPO 光纤跳线',
+    titleEn: 'MPO Patch Cables',
+    descZh: '12芯/24芯，A/B/C型极性，MTP®兼容，适用于数据中心主干布线。',
+    descEn: '12/24-fiber, Type A/B/C polarity, MTP® compatible for data center backbone cabling.',
+    products: [
+      { name: lang === 'en' ? 'MPO-12 Female Type-A 3m' : 'MPO-12 母头 A型 3m', model: 'FL-MPO12-F-A-3M' },
+      { name: lang === 'en' ? 'MPO-24 Male Type-B 5m' : 'MPO-24 公头 B型 5m', model: 'FL-MPO24-M-B-5M' },
+      { name: lang === 'en' ? 'MPO-12 to 12xLC Breakout 3m' : 'MPO-12转12xLC 分支跳线 3m', model: 'FL-MPO12-LC-3M' },
+    ],
+  },
+  {
+    id: 'mt-modules',
+    icon: '🟦',
+    titleZh: 'MT 光纤模块',
+    titleEn: 'MT Fiber Modules',
+    descZh: '4/8/12芯MT接头，黑头/绿头，适用于高密度光纤阵列连接。',
+    descEn: '4/8/12-fiber MT connectors, black/green ferrule, for high-density fiber array connections.',
+    products: [
+      { name: lang === 'en' ? 'MT-8 Black 2m' : 'MT-8 黑头 2m', model: 'FL-MT8-BK-2M' },
+      { name: lang === 'en' ? 'MT-12 Green 1m' : 'MT-12 绿头 1m', model: 'FL-MT12-GR-1M' },
+      { name: lang === 'en' ? 'MT-4 Custom' : 'MT-4 定制', model: 'FL-MT4-CUSTOM' },
+    ],
+  },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'High-Density Fiber Connectivity – FiberLink' : '高密度光纤连接组件 – FiberLink'}
+  description={lang === 'en'
+    ? 'MPO fiber cables and MT modules for high-density data center and telecom applications.'
+    : 'MPO跳线和MT模块，适用于高密度数据中心和电信连接应用。'}
+>
+  <Breadcrumb
+    lang={lang}
+    items={[{ label: lang === 'en' ? 'Products' : '产品', href: '/' }]}
+    current={lang === 'en' ? 'High-Density Connectivity' : '高密度连接组件'}
+  />
+
+  <section class="bg-gradient-to-r from-purple-700 to-indigo-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-4xl">🔲</span>
+        <div>
+          <h1 class="text-3xl font-bold">
+            {lang === 'en' ? 'High-Density Fiber Connectivity' : '高密度光纤连接组件'}
+          </h1>
+          <p class="text-purple-200 mt-1">
+            {lang === 'en' ? 'MPO cables & MT modules · Maximize rack density · Data center grade' : 'MPO跳线 & MT模块 · 最大化机架密度 · 数据中心级'}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 space-y-10">
+      {subCategories.map(sub => (
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+          <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-indigo-50">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">{sub.icon}</span>
+              <div>
+                <h2 class="text-xl font-bold text-gray-900">{lang === 'en' ? sub.titleEn : sub.titleZh}</h2>
+                <p class="text-gray-500 text-sm">{lang === 'en' ? sub.descEn : sub.descZh}</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {sub.products.map(p => (
+                <div class="border border-gray-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-sm transition-all">
+                  <div class="text-xs font-mono text-gray-400 mb-1">{p.model}</div>
+                  <div class="font-medium text-gray-900 mb-3 text-sm">{p.name}</div>
+                  <button
+                    onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${p.model}'}}))`}
+                    class="w-full py-2 bg-purple-600 text-white text-xs font-medium rounded hover:bg-purple-700 transition-colors"
+                  >
+                    {lang === 'en' ? 'Inquire Now' : '立即询价'}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div class="mt-6 bg-purple-600 rounded-2xl p-8 text-white text-center">
+        <h3 class="text-2xl font-bold mb-2">{lang === 'en' ? 'Custom High-Density Solutions' : '定制高密度解决方案'}</h3>
+        <p class="text-purple-100 mb-6">
+          {lang === 'en'
+            ? 'Custom MPO polarity, fiber count, connector type and length. Contact us for a project quote.'
+            : '定制MPO极性、芯数、连接器类型和长度，联系我们获取项目报价。'}
+        </p>
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-white text-purple-700 font-bold rounded-lg hover:bg-purple-50 transition-colors"
+        >
+          {lang === 'en' ? '📧 Request Quote' : '📧 申请报价'}
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>

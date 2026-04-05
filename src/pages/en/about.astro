@@ -1,0 +1,201 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const lang = 'en';
+
+const timeline = [
+  { year: '2010', title: 'Founded', desc: 'Founded in Shenzhen, focused on PM fiber product R&D and manufacturing.' },
+  { year: '2013', title: 'Product Expansion', desc: 'Launched high-density MPO series, entering the data center market.' },
+  { year: '2016', title: 'ISO 9001 Certified', desc: 'ISO 9001 certified; products entered European and American markets.' },
+  { year: '2020', title: 'Test Instruments', desc: 'Launched proprietary OTDR test solutions, completing the product ecosystem.' },
+  { year: '2024', title: '50+ Countries', desc: 'Products exported to 50+ countries and regions with continuously growing annual revenue.' },
+];
+const team = [
+  { name: 'Dr. Chen Wei', role: 'Chief Technology Officer', emoji: '👨‍🔬' },
+  { name: 'Lisa Zhang', role: 'Sales Director', emoji: '👩‍💼' },
+  { name: 'Mark Liu', role: 'Quality Director', emoji: '👨‍💼' },
+  { name: 'Amy Wang', role: 'Product Manager', emoji: '👩‍💻' },
+];
+
+const caseStudies = [
+  {
+    flag: '🇩🇪',
+    country: 'Germany',
+    industry: 'Fiber Laser R&D',
+    clientType: 'University Research Lab',
+    challenge: "Required PM1550 patch cords with extinction ratio ≥ 30 dB for a high-power femtosecond laser experiment. Previous supplier's products exhibited inconsistent ER values causing experiment failures.",
+    solution: 'Supplied armored PM1550 patch cords, 100% individually tested for ER ≥ 30 dB before shipment. Delivered 20 units within 5 business days.',
+    result: 'Experiment success rate improved from 60% → 98%',
+    resultColor: 'text-green-600',
+  },
+  {
+    flag: '🇺🇸',
+    country: 'United States',
+    industry: 'Data Center',
+    clientType: 'Cloud Service Provider',
+    challenge: 'Needed to upgrade 2,000 MPO-12 patch cords across 4 data centers simultaneously, with tight budget constraints and a 3-week delivery window.',
+    solution: 'Provided Type-B polarity MPO-12 patch cords with OFNR jacket. Bulk pricing with factory-direct shipment in two batches to match their installation schedule.',
+    result: '30% cost reduction vs. previous US supplier',
+    resultColor: 'text-blue-600',
+  },
+  {
+    flag: '🇯🇵',
+    country: 'Japan',
+    industry: 'Quantum Computing',
+    clientType: 'National Research Institute',
+    challenge: 'Required ultra-low insertion loss PM980 patch cords for photon entanglement experiments. IL < 0.2 dB with full test report per unit.',
+    solution: 'Delivered 50 units of PM980 LC/APC patch cords, each with individual OTDR and IL test certificate. Average IL achieved: 0.15 dB.',
+    result: 'Passed all acceptance tests; ongoing supply for 3 years',
+    resultColor: 'text-purple-600',
+  },
+  {
+    flag: '🇬🇧',
+    country: 'United Kingdom',
+    industry: 'Telecom OEM',
+    clientType: 'Network Equipment Manufacturer',
+    challenge: "Needed a reliable OEM supplier for FC/APC simplex patch cords meeting Telcordia GR-326. Monthly volume 5,000+ units with consistent quality.",
+    solution: "Set up a dedicated production line with batch-by-batch sampling QC. Custom labeling and packaging to client's brand specifications.",
+    result: 'Zero defect returns in 18 months of cooperation',
+    resultColor: 'text-orange-600',
+  },
+];
+---
+
+<Layout
+  title="About FiberLink – PM Fiber Optic Solutions"
+  description="FiberLink is a professional fiber optic manufacturer with 10+ years of experience, serving 50+ countries worldwide."
+>
+  <section class="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">About FiberLink</h1>
+      <p class="text-xl text-blue-200 max-w-2xl mx-auto">Dedicated Fiber Optic Interconnect Solutions Since 2010</p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
+          <p class="text-gray-600 leading-relaxed mb-4">FiberLink Technology is committed to delivering premium fiber optic interconnect solutions that empower scientists, engineers, and system integrators worldwide. We combine deep materials expertise with rigorous quality control to provide products that meet the most demanding specifications.</p>
+          <p class="text-gray-600 leading-relaxed">From precision PM fiber patch cords for quantum computing research to high-density MPO systems for cloud data centers, our solutions power the world's most advanced optical systems.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          {[
+            { num: '10+', label: 'Years Experience' },
+            { num: '50+', label: 'Countries Served' },
+            { num: '5000+', label: 'Product Models' },
+            { num: '100%', label: 'Pre-ship Testing' },
+          ].map(stat => (
+            <div class="bg-brand-blue-light rounded-2xl p-6 text-center">
+              <div class="text-3xl font-bold text-brand-blue mb-1">{stat.num}</div>
+              <div class="text-sm text-gray-600">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center text-gray-900 mb-8">Certifications & Standards</h2>
+      <div class="flex flex-wrap justify-center gap-6">
+        {['ISO 9001:2015', 'CE', 'RoHS', 'IEC 61300', 'Telcordia GR-326', 'MIL-SPEC'].map(cert => (
+          <div class="bg-white rounded-xl px-6 py-4 shadow-sm border border-gray-100 text-center">
+            <div class="text-2xl mb-1">🏅</div>
+            <div class="font-semibold text-gray-800 text-sm">{cert}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Journey</h2>
+      <div class="space-y-8">
+        {timeline.map(item => (
+          <div class="flex items-start gap-6">
+            <div class="flex-shrink-0 w-16 h-16 bg-brand-blue text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg">{item.year}</div>
+            <div class="flex-1 bg-gray-50 rounded-xl p-5 shadow-sm">
+              <h3 class="font-bold text-gray-900 mb-1">{item.title}</h3>
+              <p class="text-gray-600 text-sm">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Team</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        {team.map(member => (
+          <div class="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow">
+            <div class="text-5xl mb-3">{member.emoji}</div>
+            <div class="font-bold text-gray-900 mb-1">{member.name}</div>
+            <div class="text-sm text-brand-blue">{member.role}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Case Studies -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Customer Case Studies</h2>
+        <p class="text-gray-500 max-w-2xl mx-auto">Real challenges, real solutions. Here's how we've helped clients in different industries.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {caseStudies.map(c => (
+          <div class="border border-gray-200 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
+            <div class="bg-gradient-to-r from-gray-50 to-blue-50 px-6 py-4 flex items-center justify-between border-b border-gray-100">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">{c.flag}</span>
+                <div>
+                  <div class="font-bold text-gray-900">{c.country}</div>
+                  <div class="text-xs text-gray-500">{c.industry}</div>
+                </div>
+              </div>
+              <span class="text-xs bg-brand-blue text-white px-2 py-1 rounded-full">{c.clientType}</span>
+            </div>
+            <div class="p-6 space-y-4">
+              <div>
+                <div class="text-xs font-semibold text-red-500 uppercase tracking-wide mb-1">⚠ Challenge</div>
+                <p class="text-gray-700 text-sm leading-relaxed">{c.challenge}</p>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-blue-500 uppercase tracking-wide mb-1">✦ Solution</div>
+                <p class="text-gray-700 text-sm leading-relaxed">{c.solution}</p>
+              </div>
+              <div class="bg-green-50 rounded-lg px-4 py-3 flex items-center gap-2">
+                <span class="text-lg">✅</span>
+                <span class={`font-semibold text-sm ${c.resultColor}`}>{c.result}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 text-center">
+        <p class="text-gray-500 mb-4">Have a similar challenge? Tell us your requirements and we'll design the solution.</p>
+        <button onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-dark transition-colors">
+          💬 Discuss My Requirements
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-brand-blue text-white">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Let's Work Together</h2>
+      <p class="text-blue-100 mb-8">Whether you need standard products or fully custom solutions, our team is ready to help.</p>
+      <button onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors">
+        📧 Contact Us Now
+      </button>
+    </div>
+  </section>
+</Layout>

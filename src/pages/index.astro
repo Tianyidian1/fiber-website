@@ -1,0 +1,305 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroBanner from '../components/home/HeroBanner.tsx';
+import { useTranslations, getLangFromUrl, getLocalizedPath } from '../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const banners = [
+  {
+    title: lang === 'en' ? 'Panda PM Fiber Patch Cord' : '熊猫型保偏光纤跳线',
+    subtitle: lang === 'en' ? 'Polarization Maintaining' : '保偏系列',
+    desc: lang === 'en'
+      ? 'Ultra-low insertion loss <0.3dB, high extinction ratio 25-30dB. Ideal for fiber laser, sensing, and quantum communication.'
+      : '超低插入损耗 <0.3dB，高消光比 25-30dB，适用于光纤激光、传感及量子通信应用。',
+    btnText: lang === 'en' ? 'Inquire Now' : '立即询价',
+    btnHref: getLocalizedPath('/products/pm-patch-cord', lang),
+    bg: 'bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800',
+    accent: 'bg-blue-500/30 text-blue-100',
+    image: '🔵',
+  },
+  {
+    title: lang === 'en' ? 'MPO High-Density Fiber Cable' : 'MPO 高密度光纤跳线',
+    subtitle: lang === 'en' ? 'High Density' : '高密度系列',
+    desc: lang === 'en'
+      ? '12/24-fiber MPO cables, Type A/B/C polarity. Replace multiple traditional patch cords to boost rack density.'
+      : '12芯/24芯MPO跳线，支持A/B/C型极性，取代多根传统跳线，大幅提升机架密度。',
+    btnText: lang === 'en' ? 'Learn More' : '了解更多',
+    btnHref: getLocalizedPath('/products/high-density', lang),
+    bg: 'bg-gradient-to-br from-indigo-700 via-purple-600 to-indigo-800',
+    accent: 'bg-indigo-500/30 text-indigo-100',
+    image: '🔲',
+  },
+  {
+    title: lang === 'en' ? 'Handheld OTDR Test Solution' : '手持式OTDR测试解决方案',
+    subtitle: lang === 'en' ? 'Test & Measurement' : '专业测试',
+    desc: lang === 'en'
+      ? 'Precision fault location for fiber networks. Handheld & modular OTDR for field and lab applications.'
+      : '光纤网络精准故障定位，提供手持式与模块化OTDR，适用于工程现场和实验室环境。',
+    btnText: lang === 'en' ? 'View Products' : '查看产品',
+    btnHref: getLocalizedPath('/products/test-solutions', lang),
+    bg: 'bg-gradient-to-br from-teal-700 via-cyan-600 to-teal-800',
+    accent: 'bg-teal-500/30 text-teal-100',
+    image: '🔬',
+  },
+  {
+    title: lang === 'en' ? 'High-Power Laser Delivery Cable' : '高功率激光传能跳线',
+    subtitle: lang === 'en' ? 'Specialty Applications' : '特种应用',
+    desc: lang === 'en'
+      ? 'Engineered for high-power laser delivery and cutting-edge photonic systems. Robust, reliable, and precise.'
+      : '专为高功率激光传输和前沿光子系统设计，坚固耐用，性能卓越。',
+    btnText: lang === 'en' ? 'Get Quote' : '获取报价',
+    btnHref: getLocalizedPath('/products/specialty', lang),
+    bg: 'bg-gradient-to-br from-orange-600 via-red-500 to-orange-700',
+    accent: 'bg-orange-500/30 text-orange-100',
+    image: '⚡',
+  },
+];
+
+const productCategories = [
+  {
+    icon: '🔵',
+    titleZh: '保偏光纤跳线',
+    titleEn: 'PM Patch Cords',
+    descZh: '熊猫型保偏光纤，超低插损 <0.3dB，高消光比25/30dB，专为光纤激光、传感、量子通信设计。',
+    descEn: 'Panda PM fiber with ultra-low insertion loss <0.3dB and high extinction ratio for fiber laser and sensing.',
+    href: '/products/pm-patch-cord',
+    features: lang === 'en'
+      ? ['Extinction Ratio: 25/30dB', 'Diameter: 0.9/2.0/3.0mm', 'Connector: LC/SC/FC/ST']
+      : ['消光比：25/30dB', '线径：0.9/2.0/3.0mm', '连接器：LC/SC/FC/ST'],
+    color: 'border-blue-500',
+    iconBg: 'bg-blue-50',
+  },
+  {
+    icon: '🔲',
+    titleZh: '高密度连接组件',
+    titleEn: 'High-Density',
+    descZh: 'MPO跳线（12/24芯，A/B/C极性）及MT模块，大幅提升机架密度，降低布线成本。',
+    descEn: 'MPO cables (12/24-fiber, Type A/B/C) and MT modules for maximum rack density.',
+    href: '/products/high-density',
+    features: lang === 'en'
+      ? ['12/24-fiber MPO', 'Type A/B/C polarity', 'MT-8/MT-12 modules']
+      : ['12/24芯MPO', 'A/B/C型极性', 'MT-8/MT-12模块'],
+    color: 'border-purple-500',
+    iconBg: 'bg-purple-50',
+  },
+  {
+    icon: '📡',
+    titleZh: '专业测试解决方案',
+    titleEn: 'Test Solutions',
+    descZh: '光通信"雷达"，精准定位故障。手持式与模块化OTDR，满足各类工程测试需求。',
+    descEn: 'Handheld and modular OTDR for precise fault location in fiber optic networks.',
+    href: '/products/test-solutions',
+    features: lang === 'en'
+      ? ['Handheld OTDR', 'Modular OTDR', 'Complete test kits']
+      : ['手持式OTDR', '模块化OTDR', '完整测试套件'],
+    color: 'border-teal-500',
+    iconBg: 'bg-teal-50',
+  },
+  {
+    icon: '⚡',
+    titleZh: '特种应用跳线',
+    titleEn: 'Specialty Cables',
+    descZh: '激光系统专用，高功率传输。保偏激光跳线与高能激光传能跳线，满足特殊工业需求。',
+    descEn: 'PM laser and high-power delivery cables for industrial laser and photonic systems.',
+    href: '/products/specialty',
+    features: lang === 'en'
+      ? ['PM laser cables', 'High-power delivery', 'Custom specifications']
+      : ['保偏激光跳线', '高功率传能', '定制规格'],
+    color: 'border-orange-500',
+    iconBg: 'bg-orange-50',
+  },
+];
+
+const advantages = [
+  {
+    icon: '📉',
+    titleZh: '超低插入损耗',
+    titleEn: 'Ultra-Low Insertion Loss',
+    descZh: '插入损耗 < 0.3dB，确保信号完整传输，适用于高精度光纤系统。',
+    descEn: 'Insertion loss <0.3dB ensuring complete signal integrity for precision fiber systems.',
+  },
+  {
+    icon: '🚀',
+    titleZh: '快速发货',
+    titleEn: 'Fast Delivery',
+    descZh: '标准产品3-5日发货，定制产品7-14日，全球物流覆盖。',
+    descEn: 'Standard products ship in 3-5 days, custom in 7-14 days with worldwide logistics.',
+  },
+  {
+    icon: '🔧',
+    titleZh: '强大定制能力',
+    titleEn: 'Custom Capability',
+    descZh: '支持OEM/ODM，满足任意长度、连接器组合及特殊规格需求。',
+    descEn: 'OEM/ODM support for any length, connector combination, and special specifications.',
+  },
+  {
+    icon: '✅',
+    titleZh: '严格品质保证',
+    titleEn: 'Quality Assurance',
+    descZh: '每批次100%检测，提供完整测试报告，符合IEC标准。',
+    descEn: '100% batch testing with complete test reports, compliant with IEC standards.',
+  },
+  {
+    icon: '🌍',
+    titleZh: '全球客户服务',
+    titleEn: 'Global Service',
+    descZh: '服务全球50+国家客户，多语言技术支持。',
+    descEn: 'Serving 50+ countries with multi-language technical support.',
+  },
+  {
+    icon: '📋',
+    titleZh: '完整技术文档',
+    titleEn: 'Full Documentation',
+    descZh: '每款产品提供详细数据手册、安装指南及符合CE/RoHS证书。',
+    descEn: 'Detailed datasheets, installation guides, CE/RoHS certificates for every product.',
+  },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'FiberLink – Professional Fiber Optic Patch Cord Solutions' : 'FiberLink 光纤跳线 – 专业光纤互联解决方案'}
+  description={lang === 'en'
+    ? 'Professional fiber optic patch cord manufacturer. Specializing in PM patch cords, MPO high-density, OTDR test solutions, and specialty cables.'
+    : '专业光纤跳线制造商，提供保偏跳线、MPO高密度、OTDR测试及特种跳线解决方案。'}
+>
+  <!-- Hero Banner -->
+  <HeroBanner
+    client:load
+    banners={banners}
+    inquireText={lang === 'en' ? 'Inquire Now' : '立即询价'}
+    learnText={lang === 'en' ? 'Learn More' : '了解更多'}
+  />
+
+  <!-- Order Notice Banner -->
+  <section class="bg-amber-50 border-b-4 border-amber-400">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-2 text-sm">
+        <span class="font-bold text-amber-700 flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+          </svg>
+          {lang === 'en' ? 'ORDER NOTICE' : '订单说明'}
+        </span>
+        <span class="text-amber-800">
+          {lang === 'en'
+            ? 'We accept civilian orders only. No military or government contracts.'
+            : '本司只接受民用订单，不承接军用及政府项目。'}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust bar -->
+  <section class="bg-gray-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex flex-wrap justify-center md:justify-between items-center gap-4 text-sm text-gray-600">
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> {lang === 'en' ? 'Sample Testing Supported' : '可提供样品并支持客户自行测试'}</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> {lang === 'en' ? '100% Tested Before Shipment' : '发货前100%测试'}</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> {lang === 'en' ? 'Custom Solutions Available' : '提供更全面的定制化解决方案'}</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> {lang === 'en' ? '10+ Years Experience' : '10+年行业经验'}</div>
+        <div class="flex items-center gap-2"><span class="text-green-500">✓</span> {lang === 'en' ? '50+ Countries Served' : '服务50+国家'}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Product Lines -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="section-title">{t('home.products.title')}</h2>
+        <p class="text-gray-500 text-lg max-w-2xl mx-auto">{t('home.products.subtitle')}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {productCategories.map(cat => (
+          <div class={`product-card border-t-4 ${cat.color}`}>
+            <div class={`${cat.iconBg} p-6 flex justify-center`}>
+              <span class="text-5xl">{cat.icon}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-gray-900 text-lg mb-2">
+                {lang === 'en' ? cat.titleEn : cat.titleZh}
+              </h3>
+              <p class="text-gray-500 text-sm mb-4 leading-relaxed">
+                {lang === 'en' ? cat.descEn : cat.descZh}
+              </p>
+              <ul class="space-y-1 mb-5">
+                {cat.features.map(f => (
+                  <li class="flex items-center gap-2 text-xs text-gray-600">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-blue flex-shrink-0" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <div class="flex gap-2">
+                <a href={getLocalizedPath(cat.href, lang)} class="flex-1 text-center py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-blue-dark transition-colors">
+                  {t('home.products.detail')}
+                </a>
+                <button
+                  onclick={`document.dispatchEvent(new CustomEvent('open-inquiry', {detail:{product:'${lang === 'en' ? cat.titleEn : cat.titleZh}'}}))`}
+                  class="flex-1 text-center py-2 border border-brand-blue text-brand-blue text-sm font-medium rounded hover:bg-brand-blue hover:text-white transition-colors"
+                >
+                  {t('home.products.inquire')}
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="section-title">{t('home.advantages.title')}</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {advantages.map(adv => (
+          <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+            <div class="text-3xl mb-3">{adv.icon}</div>
+            <h3 class="font-bold text-gray-900 mb-2">
+              {lang === 'en' ? adv.titleEn : adv.titleZh}
+            </h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              {lang === 'en' ? adv.descEn : adv.descZh}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">
+        {lang === 'en' ? 'Ready to Get Started?' : '准备好开始了吗？'}
+      </h2>
+      <p class="text-blue-100 text-lg mb-8">
+        {lang === 'en'
+          ? 'Send us your requirements and our engineers will provide a professional solution within 24 hours.'
+          : '发送您的需求，我们的工程师将在24小时内提供专业解决方案。'}
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-4 bg-white text-brand-blue font-bold rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-sm"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          {lang === 'en' ? 'Send Inquiry' : '发送询盘'}
+        </button>
+        <a
+          href={getLocalizedPath('/contact', lang)}
+          class="inline-flex items-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-brand-blue transition-colors text-sm"
+        >
+          {lang === 'en' ? 'Contact Us' : '联系我们'}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

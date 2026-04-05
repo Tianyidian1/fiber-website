@@ -1,0 +1,191 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import { getLocalizedPath } from '../../../i18n/index';
+
+const lang = 'en';
+
+const products = [
+  {
+    id: 'pm-lc-apc-1m',
+    name: 'LC/APC PM Patch Cord 1m',
+    model: 'FL-PM-LC/APC-1M',
+    specs: {
+      'Fiber Type': 'PM1550 (Panda)',
+      'Connector': 'LC/APC',
+      'Insertion Loss': '< 0.3 dB',
+      'Extinction Ratio': '≥ 25 dB',
+      'Length': '1 m',
+      'Jacket': '0.9mm PVC',
+    },
+    icon: '🔵',
+    badge: 'Bestseller',
+    badgeColor: 'bg-orange-500',
+  },
+  {
+    id: 'pm-fc-pc-2m',
+    name: 'FC/PC PM Patch Cord 2m',
+    model: 'FL-PM-FC/PC-2M',
+    specs: {
+      'Fiber Type': 'PM1550 (Panda)',
+      'Connector': 'FC/PC',
+      'Insertion Loss': '< 0.3 dB',
+      'Extinction Ratio': '≥ 25 dB',
+      'Length': '2 m',
+      'Jacket': '2.0mm PVC',
+    },
+    icon: '🔵',
+  },
+  {
+    id: 'pm-sc-apc-armored',
+    name: 'SC/APC PM Armored Cable 1m',
+    model: 'FL-PM-SC/APC-ARM-1M',
+    specs: {
+      'Fiber Type': 'PM1550 (Panda)',
+      'Connector': 'SC/APC',
+      'Insertion Loss': '< 0.3 dB',
+      'Extinction Ratio': '≥ 30 dB',
+      'Length': '1 m',
+      'Jacket': '3.0mm SS Armored',
+    },
+    icon: '🔵',
+    badge: 'New',
+    badgeColor: 'bg-green-500',
+  },
+  {
+    id: 'pm-st-pm980',
+    name: 'ST/PC PM980 Patch Cord 1m',
+    model: 'FL-PM980-ST/PC-1M',
+    specs: {
+      'Fiber Type': 'PM980 (Panda)',
+      'Connector': 'ST/PC',
+      'Insertion Loss': '< 0.3 dB',
+      'Extinction Ratio': '≥ 25 dB',
+      'Length': '1 m',
+      'Jacket': '0.9mm PVC',
+    },
+    icon: '🔵',
+  },
+  {
+    id: 'pm-lc-fc-hybrid',
+    name: 'LC/APC-FC/APC PM Hybrid 2m',
+    model: 'FL-PM-LC-FC-HYB-2M',
+    specs: {
+      'Fiber Type': 'PM1550 (Panda)',
+      'Connector': 'LC/APC - FC/APC',
+      'Insertion Loss': '< 0.5 dB',
+      'Extinction Ratio': '≥ 20 dB',
+      'Length': '2 m',
+      'Jacket': '2.0mm PVC',
+    },
+    icon: '🔵',
+  },
+  {
+    id: 'pm-custom',
+    name: 'Custom PM Patch Cord',
+    model: 'FL-PM-CUSTOM',
+    specs: {
+      'Fiber Type': 'PM630/780/980/1310/1550',
+      'Connector': 'Any combination',
+      'Length': '0.1m - 100m',
+      'Color': 'White/Red/Blue/Yellow',
+    },
+    icon: '🔧',
+    badge: 'Custom',
+    badgeColor: 'bg-blue-500',
+  },
+];
+---
+
+<Layout
+  title="PM Fiber Patch Cords – FiberLink"
+  description="Panda-type PM fiber patch cords with ultra-low insertion loss and high extinction ratio for fiber laser and sensing applications."
+>
+  <Breadcrumb
+    lang={lang}
+    items={[{ label: 'Products', href: '/en/' }]}
+    current="PM Patch Cords"
+  />
+
+  <!-- Category header -->
+  <section class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-4xl">🔵</span>
+        <div>
+          <h1 class="text-3xl font-bold">Polarization Maintaining (PM) Patch Cords</h1>
+          <p class="text-blue-200 mt-1">Panda-type PM fiber · Low IL · High ER · Custom lengths available</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3 mt-6">
+        {['IL < 0.3dB', 'ER ≥ 25/30dB', 'PM630 ~ PM1550', '0.9/2.0/3.0mm jacket', 'IEC 61300'].map(tag => (
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm text-white backdrop-blur-sm">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Products grid -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products.map(product => (
+          <div class="product-card relative">
+            {product.badge && (
+              <span class={`absolute top-3 right-3 text-xs text-white font-semibold px-2 py-1 rounded-full ${product.badgeColor}`}>
+                {product.badge}
+              </span>
+            )}
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 flex justify-center items-center">
+              <span class="text-6xl">{product.icon}</span>
+            </div>
+            <div class="p-5">
+              <div class="text-xs text-gray-400 font-mono mb-1">{product.model}</div>
+              <h3 class="font-bold text-gray-900 mb-3">{product.name}</h3>
+              <div class="overflow-x-auto mb-4">
+                <table class="w-full text-xs">
+                  <tbody>
+                    {Object.entries(product.specs).map(([k, v]) => (
+                      <tr class="border-b border-gray-100">
+                        <td class="py-1.5 pr-3 text-gray-500 font-medium whitespace-nowrap">{k}</td>
+                        <td class="py-1.5 text-gray-800">{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div class="flex gap-2">
+                <a
+                  href={`/en/products/pm-patch-cord/${product.id}`}
+                  class="flex-1 text-center py-2 text-sm font-medium text-brand-blue border border-brand-blue rounded hover:bg-brand-blue hover:text-white transition-colors"
+                >
+                  Details
+                </a>
+                <button
+                  onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${product.model}'}}))`}
+                  class="flex-1 py-2 text-sm font-medium bg-brand-blue text-white rounded hover:bg-brand-blue-dark transition-colors"
+                >
+                  Inquire
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Custom CTA -->
+      <div class="mt-10 bg-blue-600 rounded-2xl p-8 text-white text-center">
+        <h3 class="text-2xl font-bold mb-2">Need Custom Specifications?</h3>
+        <p class="text-blue-100 mb-6">
+          Any connector combination, length (0.1m–100m), wavelength (630–1550nm), jacket type. Tell us your requirements!
+        </p>
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition-colors"
+        >
+          📧 Send Custom Inquiry
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>

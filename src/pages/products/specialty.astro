@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const products = [
+  {
+    icon: '⚡',
+    nameZh: '保偏激光跳线 PM-LDC',
+    nameEn: 'PM Laser Delivery Cable PM-LDC',
+    model: 'FL-PM-LDC-1064',
+    descZh: '专为1064nm激光系统设计，高消光比保偏，低损耗传输。',
+    descEn: 'Designed for 1064nm laser systems with high ER PM and low-loss transmission.',
+    specZh: { '工作波长': '1064nm', '消光比': '≥ 25dB', '功率承受': '≤ 1W CW', '连接器': 'FC/APC', '护套': '3.0mm 铠装' },
+    specEn: { 'Wavelength': '1064nm', 'Extinction Ratio': '≥ 25dB', 'Power Handling': '≤ 1W CW', 'Connector': 'FC/APC', 'Jacket': '3.0mm Armored' },
+  },
+  {
+    icon: '🔥',
+    nameZh: '高功率传能跳线 HP-200W',
+    nameEn: 'High-Power Delivery Cable HP-200W',
+    model: 'FL-HP-200W',
+    descZh: '高功率激光切割/焊接传输，支持200W连续光功率，大芯径多模光纤。',
+    descEn: 'High-power laser cutting/welding delivery, supports 200W CW, large core multimode fiber.',
+    specZh: { '最大功率': '200W CW', '光纤类型': '多模 105/125μm', '数值孔径': '0.22 NA', '连接器': 'SMA905', '长度': '1m-10m定制' },
+    specEn: { 'Max Power': '200W CW', 'Fiber Type': 'MM 105/125μm', 'NA': '0.22', 'Connector': 'SMA905', 'Length': '1m-10m custom' },
+    badge: lang === 'en' ? 'Industrial' : '工业级',
+  },
+  {
+    icon: '💎',
+    nameZh: '双窗口保偏跳线 DW-PM',
+    nameEn: 'Dual-Window PM Cable DW-PM',
+    model: 'FL-DW-PM-1310-1550',
+    descZh: '同时支持1310nm和1550nm工作，适用于相干探测和光纤传感系统。',
+    descEn: 'Supports both 1310nm and 1550nm, ideal for coherent detection and sensing.',
+    specZh: { '工作波长': '1310/1550nm', '消光比': '≥ 20dB', '插入损耗': '< 0.5dB', '连接器': '可定制', '应用': '相干探测' },
+    specEn: { 'Wavelength': '1310/1550nm', 'Extinction Ratio': '≥ 20dB', 'Insertion Loss': '< 0.5dB', 'Connector': 'Custom', 'Application': 'Coherent Detection' },
+  },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'Specialty Fiber Cables – FiberLink' : '特种应用跳线 – FiberLink'}
+  description={lang === 'en'
+    ? 'Specialty PM laser delivery and high-power fiber cables for industrial and photonic applications.'
+    : '特种保偏激光跳线和高功率传能光缆，适用于工业激光和光子学应用。'}
+>
+  <Breadcrumb lang={lang} items={[{ label: lang === 'en' ? 'Products' : '产品', href: '/' }]} current={lang === 'en' ? 'Specialty Cables' : '特种应用跳线'} />
+
+  <section class="bg-gradient-to-r from-orange-600 to-red-800 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4">
+        <span class="text-4xl">⚡</span>
+        <div>
+          <h1 class="text-3xl font-bold">{lang === 'en' ? 'Specialty Application Cables' : '特种应用跳线'}</h1>
+          <p class="text-orange-200 mt-1">{lang === 'en' ? 'PM Laser · High-Power Delivery · Custom Photonic Solutions' : '保偏激光 · 高功率传能 · 定制光子解决方案'}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {products.map(p => (
+          <div class="product-card">
+            <div class="bg-gradient-to-br from-orange-50 to-red-50 p-8 flex justify-center">
+              <span class="text-6xl">{p.icon}</span>
+            </div>
+            <div class="p-5">
+              {p.badge && <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full font-medium mb-2 inline-block">{p.badge}</span>}
+              <div class="text-xs text-gray-400 font-mono mb-1">{p.model}</div>
+              <h3 class="font-bold text-gray-900 mb-2">{lang === 'en' ? p.nameEn : p.nameZh}</h3>
+              <p class="text-gray-500 text-xs mb-3 leading-relaxed">{lang === 'en' ? p.descEn : p.descZh}</p>
+              <div class="overflow-x-auto mb-4">
+                <table class="w-full text-xs">
+                  <tbody>
+                    {Object.entries(lang === 'en' ? p.specEn : p.specZh).map(([k, v]) => (
+                      <tr class="border-b border-gray-100">
+                        <td class="py-1.5 pr-3 text-gray-500 font-medium whitespace-nowrap">{k}</td>
+                        <td class="py-1.5 text-gray-800">{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <button
+                onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${p.model}'}}))`}
+                class="w-full py-2.5 bg-orange-600 text-white text-sm font-medium rounded hover:bg-orange-700 transition-colors"
+              >
+                {lang === 'en' ? 'Inquire Now' : '立即询价'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

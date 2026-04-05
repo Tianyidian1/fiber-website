@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const products = [
+  {
+    icon: '📡',
+    nameZh: '手持式OTDR FLT-A100',
+    nameEn: 'Handheld OTDR FLT-A100',
+    model: 'FLT-A100',
+    specZh: { '测量范围': '0.1–120km', '动态范围': '36dB', '分辨率': '0.1m', '波长': '1310/1550nm', '显示': '7英寸触摸屏' },
+    specEn: { 'Range': '0.1–120km', 'Dynamic Range': '36dB', 'Resolution': '0.1m', 'Wavelength': '1310/1550nm', 'Display': '7" Touch Screen' },
+    badge: lang === 'en' ? 'Popular' : '热销',
+  },
+  {
+    icon: '🔬',
+    nameZh: '模块化OTDR FLT-M200',
+    nameEn: 'Modular OTDR FLT-M200',
+    model: 'FLT-M200',
+    specZh: { '测量范围': '0.1–200km', '动态范围': '42dB', '模块插槽': '2槽可扩展', '波长': '1310/1550/1625nm', '接口': 'USB/Ethernet' },
+    specEn: { 'Range': '0.1–200km', 'Dynamic Range': '42dB', 'Module Slots': '2 expandable', 'Wavelength': '1310/1550/1625nm', 'Interface': 'USB/Ethernet' },
+  },
+  {
+    icon: '⚙️',
+    nameZh: '光源光功率计套件',
+    nameEn: 'Light Source & Power Meter Kit',
+    model: 'FLT-LSP-01',
+    specZh: { '光源波长': '1310/1550nm', '功率范围': '-70~+3dBm', '精度': '±0.1dB', '电池': '14小时续航', '防护等级': 'IP65' },
+    specEn: { 'Source WL': '1310/1550nm', 'Power Range': '-70~+3dBm', 'Accuracy': '±0.1dB', 'Battery': '14h runtime', 'Protection': 'IP65' },
+  },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'Fiber Optic Test Solutions – FiberLink' : '光纤测试解决方案 – FiberLink'}
+  description={lang === 'en'
+    ? 'Professional OTDR and fiber test equipment for field and lab fiber optic network testing.'
+    : '专业OTDR及光纤测试设备，用于工程现场及实验室光纤网络测试。'}
+>
+  <Breadcrumb lang={lang} items={[{ label: lang === 'en' ? 'Products' : '产品', href: '/' }]} current={lang === 'en' ? 'Test Solutions' : '测试解决方案'} />
+
+  <section class="bg-gradient-to-r from-teal-700 to-cyan-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4">
+        <span class="text-4xl">📡</span>
+        <div>
+          <h1 class="text-3xl font-bold">{lang === 'en' ? 'Fiber Optic Test Solutions' : '专业光纤测试解决方案'}</h1>
+          <p class="text-teal-200 mt-1">{lang === 'en' ? 'OTDR · Light Source · Power Meter · Fault Location' : 'OTDR · 光源 · 光功率计 · 精准故障定位'}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {products.map(p => (
+          <div class="product-card">
+            <div class="bg-gradient-to-br from-teal-50 to-cyan-100 p-8 flex justify-center">
+              <span class="text-6xl">{p.icon}</span>
+            </div>
+            <div class="p-5">
+              {p.badge && <span class="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-medium mb-2 inline-block">{p.badge}</span>}
+              <div class="text-xs text-gray-400 font-mono mb-1">{p.model}</div>
+              <h3 class="font-bold text-gray-900 mb-3">{lang === 'en' ? p.nameEn : p.nameZh}</h3>
+              <div class="overflow-x-auto mb-4">
+                <table class="w-full text-xs">
+                  <tbody>
+                    {Object.entries(lang === 'en' ? p.specEn : p.specZh).map(([k, v]) => (
+                      <tr class="border-b border-gray-100">
+                        <td class="py-1.5 pr-3 text-gray-500 font-medium whitespace-nowrap">{k}</td>
+                        <td class="py-1.5 text-gray-800">{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <button
+                onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${p.model}'}}))`}
+                class="w-full py-2.5 bg-teal-600 text-white text-sm font-medium rounded hover:bg-teal-700 transition-colors"
+              >
+                {lang === 'en' ? 'Inquire Now' : '立即询价'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

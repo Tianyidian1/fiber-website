@@ -1,0 +1,407 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/index';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// FAQ 内容（问题+数据+解决方案框架）
+const faqs = lang === 'en' ? [
+  {
+    q: 'What is a PM (Polarization Maintaining) fiber patch cord and when do I need one?',
+    a: 'A PM patch cord uses Panda-type or Bow-tie type fiber to maintain the polarization state of light transmission. It is required in fiber lasers, coherent optical communications, fiber optic gyroscopes, optical sensing, and quantum communication systems where ordinary single-mode fiber causes polarization mixing and measurement errors. Our PM patch cords achieve extinction ratio ≥ 25 dB, effectively eliminating polarization crosstalk.'
+  },
+  {
+    q: 'What is extinction ratio (ER) and how high does it need to be?',
+    a: 'Extinction ratio measures the ability of PM fiber to suppress cross-polarization coupling. ≥ 20 dB meets basic requirements; ≥ 25 dB suits most fiber laser and sensing applications; ≥ 30 dB is for high-precision measurement or quantum optical systems. Our standard products reach ≥ 25 dB, with premium armored versions reaching ≥ 30 dB.'
+  },
+  {
+    q: 'How is insertion loss controlled? How does it affect my system?',
+    a: 'Insertion loss (IL) measures signal attenuation at the connection point. Our PM patch cords consistently achieve IL < 0.3 dB through precision grinding and 100% individual testing. For fiber laser systems, each 0.1 dB increase in insertion loss results in approximately 2% output power loss. We recommend budgeting for link loss in your system design.'
+  },
+  {
+    q: 'Which wavelengths and connector types are available?',
+    a: 'We support all mainstream PM fiber wavelengths: PM630, PM780, PM980, PM1310, PM1550. Connector types include FC/APC, FC/PC, SC/APC, LC/APC, ST/PC, and custom hybrid combinations. Length ranges from 0.1m to 100m. Contact us if your requirement is not listed — most custom configurations ship within 5–7 business days.'
+  },
+  {
+    q: 'What is the difference between APC and PC connectors? Which should I choose?',
+    a: 'PC (Physical Contact) connectors have flat end faces with return loss of approximately -45 dB. APC (Angled Physical Contact) connectors are ground at 8°, achieving return loss better than -60 dB. For fiber lasers and sensing systems requiring low back-reflection, APC connectors are strongly recommended. For general transmission testing, PC connectors are sufficient.'
+  },
+  {
+    q: 'How do I know the slow and fast axis of a PM patch cord?',
+    a: 'We mark the slow axis direction on all PM patch cords with a color dot or printed label. Key axis position can also be identified using a polarization meter or cross-polarization inspection. When placing an order, please specify whether you need Panda or Bow-tie fiber type — the two have the same performance but differ in identifying the slow axis under a microscope.'
+  },
+] : [
+  {
+    q: '保偏光纤跳线是什么？我什么时候需要它？',
+    a: '保偏跳线（PM Patch Cord）使用熊猫型或领结型特种光纤，能够维持光的偏振态在传输过程中不变。在光纤激光器、相干光通信、光纤陀螺仪、光学传感和量子通信系统中必须使用它——普通单模光纤会导致偏振混叠，引发测量误差。我们的保偏跳线消光比 ≥ 25 dB，有效消除偏振串扰。'
+  },
+  {
+    q: '消光比（ER）是什么？需要多高才够用？',
+    a: '消光比衡量保偏光纤抑制交叉偏振耦合的能力。≥ 20 dB 满足基本要求；≥ 25 dB 适合大多数光纤激光和传感应用；≥ 30 dB 用于高精度测量或量子光学系统。我们标准产品达到 ≥ 25 dB，铠装版高端型达到 ≥ 30 dB。'
+  },
+  {
+    q: '插入损耗如何控制？对我的系统有什么影响？',
+    a: '插入损耗（IL）衡量连接点处的信号衰减。我们通过精密研磨和出厂前100%逐只检测，将保偏跳线插损稳定控制在 < 0.3 dB。对于光纤激光系统，每增加 0.1 dB 插损约造成 2% 的输出功率损失。建议在系统设计时预留链路损耗余量。'
+  },
+  {
+    q: '支持哪些波长和接头类型？可以定制吗？',
+    a: '我们支持全系保偏波长：PM630、PM780、PM980、PM1310、PM1550。接头类型涵盖 FC/APC、FC/PC、SC/APC、LC/APC、ST/PC，以及任意混合接头定制。长度范围 0.1m–100m。如规格表中没有您需要的型号，请联系我们——大多数定制规格 5–7 个工作日内发货。'
+  },
+  {
+    q: 'APC 和 PC 接头有什么区别？我该选哪种？',
+    a: 'PC（物理接触）接头端面平整，回波损耗约 -45 dB。APC（斜面物理接触）接头研磨成 8° 斜角，回波损耗优于 -60 dB。光纤激光器、传感系统等对回波灵敏的应用，强烈推荐 APC。普通传输测试场景使用 PC 即可。'
+  },
+  {
+    q: '如何区分保偏跳线的慢轴和快轴方向？',
+    a: '我们所有保偏跳线均在护套或端面上标注慢轴方向（颜色点或印字标识）。也可以使用偏振分析仪或交叉偏振检查法确认轴向。下单时请注明需要熊猫型还是领结型光纤——两者性能相同，但在显微镜下识别慢轴的方式不同。'
+  },
+];
+
+// Schema 结构化数据
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": lang === 'en' ? "PM Fiber Patch Cord" : "保偏光纤跳线",
+  "description": lang === 'en'
+    ? "Panda-type PM fiber patch cords with ultra-low insertion loss (< 0.3 dB) and high extinction ratio (≥ 25 dB) for fiber laser, sensing, and quantum communication applications."
+    : "熊猫型保偏光纤跳线，插损 < 0.3 dB，消光比 ≥ 25 dB，适用于光纤激光器、光学传感及量子通信系统。",
+  "brand": { "@type": "Brand", "name": "FiberLink" },
+  "manufacturer": { "@type": "Organization", "name": "FiberLink", "url": "https://fiberlink.com" },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "seller": { "@type": "Organization", "name": "FiberLink" }
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Insertion Loss", "value": "< 0.3 dB" },
+    { "@type": "PropertyValue", "name": "Extinction Ratio", "value": "≥ 25 dB" },
+    { "@type": "PropertyValue", "name": "Fiber Type", "value": "PM1550 / PM980 / PM1310 (Panda)" },
+    { "@type": "PropertyValue", "name": "Wavelength Range", "value": "630 nm – 1550 nm" }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.a }
+  }))
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": lang === 'en' ? "How to Select the Right PM Fiber Patch Cord" : "如何选择合适的保偏光纤跳线",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": lang === 'en' ? "Confirm wavelength" : "确认工作波长",
+      "text": lang === 'en' ? "Match the PM fiber wavelength to your laser or light source: PM630/780/980/1310/1550 nm." : "根据激光器或光源波长选择对应的保偏光纤型号：PM630/780/980/1310/1550。"
+    },
+    {
+      "@type": "HowToStep",
+      "name": lang === 'en' ? "Choose extinction ratio" : "选择消光比等级",
+      "text": lang === 'en' ? "Standard ≥ 25 dB for most applications; premium ≥ 30 dB for high-precision measurement." : "一般应用选标准款 ≥ 25 dB；高精度测量场景选高端款 ≥ 30 dB。"
+    },
+    {
+      "@type": "HowToStep",
+      "name": lang === 'en' ? "Select connector type" : "选择接头类型",
+      "text": lang === 'en' ? "Use APC connectors for low back-reflection requirements; PC for general testing." : "低回波要求选 APC 接头；一般测试用途选 PC 接头。"
+    },
+    {
+      "@type": "HowToStep",
+      "name": lang === 'en' ? "Specify length and jacket" : "确认长度和护套",
+      "text": lang === 'en' ? "0.9 mm for tight spaces, 2.0 mm for general use, 3.0 mm steel armored for harsh environments." : "0.9mm 适合紧凑空间，2.0mm 通用型，3.0mm 不锈钢铠装适合恶劣环境。"
+    }
+  ]
+};
+
+const products = [
+  {
+    id: 'pm-lc-apc-1m',
+    name: lang === 'en' ? 'LC/APC PM Patch Cord 1m' : 'LC/APC 保偏跳线 1m',
+    model: 'FL-PM-LC/APC-1M',
+    specs: {
+      [lang === 'en' ? 'Fiber Type' : '光纤类型']: 'PM1550 (Panda)',
+      [lang === 'en' ? 'Connector' : '连接器']: 'LC/APC',
+      [lang === 'en' ? 'Insertion Loss' : '插入损耗']: '< 0.3 dB',
+      [lang === 'en' ? 'Extinction Ratio' : '消光比']: '≥ 25 dB',
+      [lang === 'en' ? 'Length' : '长度']: '1 m',
+      [lang === 'en' ? 'Jacket' : '护套']: '0.9mm PVC',
+    },
+    icon: '🔵',
+    badge: lang === 'en' ? 'Bestseller' : '热销',
+    badgeColor: 'bg-orange-500',
+  },
+  {
+    id: 'pm-fc-pc-2m',
+    name: lang === 'en' ? 'FC/PC PM Patch Cord 2m' : 'FC/PC 保偏跳线 2m',
+    model: 'FL-PM-FC/PC-2M',
+    specs: {
+      [lang === 'en' ? 'Fiber Type' : '光纤类型']: 'PM1550 (Panda)',
+      [lang === 'en' ? 'Connector' : '连接器']: 'FC/PC',
+      [lang === 'en' ? 'Insertion Loss' : '插入损耗']: '< 0.3 dB',
+      [lang === 'en' ? 'Extinction Ratio' : '消光比']: '≥ 25 dB',
+      [lang === 'en' ? 'Length' : '长度']: '2 m',
+      [lang === 'en' ? 'Jacket' : '护套']: '2.0mm PVC',
+    },
+    icon: '🔵',
+  },
+  {
+    id: 'pm-sc-apc-armored',
+    name: lang === 'en' ? 'SC/APC PM Armored Cable 1m' : 'SC/APC 保偏铠装跳线 1m',
+    model: 'FL-PM-SC/APC-ARM-1M',
+    specs: {
+      [lang === 'en' ? 'Fiber Type' : '光纤类型']: 'PM1550 (Panda)',
+      [lang === 'en' ? 'Connector' : '连接器']: 'SC/APC',
+      [lang === 'en' ? 'Insertion Loss' : '插入损耗']: '< 0.3 dB',
+      [lang === 'en' ? 'Extinction Ratio' : '消光比']: '≥ 30 dB',
+      [lang === 'en' ? 'Length' : '长度']: '1 m',
+      [lang === 'en' ? 'Jacket' : '护套']: '3.0mm 不锈钢铠装',
+    },
+    icon: '🔵',
+    badge: lang === 'en' ? 'New' : '新品',
+    badgeColor: 'bg-green-500',
+  },
+  {
+    id: 'pm-st-pm980',
+    name: lang === 'en' ? 'ST/PC PM980 Patch Cord 1m' : 'ST/PC PM980 保偏跳线 1m',
+    model: 'FL-PM980-ST/PC-1M',
+    specs: {
+      [lang === 'en' ? 'Fiber Type' : '光纤类型']: 'PM980 (Panda)',
+      [lang === 'en' ? 'Connector' : '连接器']: 'ST/PC',
+      [lang === 'en' ? 'Insertion Loss' : '插入损耗']: '< 0.3 dB',
+      [lang === 'en' ? 'Extinction Ratio' : '消光比']: '≥ 25 dB',
+      [lang === 'en' ? 'Length' : '长度']: '1 m',
+      [lang === 'en' ? 'Jacket' : '护套']: '0.9mm PVC',
+    },
+    icon: '🔵',
+  },
+  {
+    id: 'pm-lc-fc-hybrid',
+    name: lang === 'en' ? 'LC/APC-FC/APC PM Hybrid 2m' : 'LC/APC-FC/APC 保偏混接跳线 2m',
+    model: 'FL-PM-LC-FC-HYB-2M',
+    specs: {
+      [lang === 'en' ? 'Fiber Type' : '光纤类型']: 'PM1550 (Panda)',
+      [lang === 'en' ? 'Connector' : '连接器']: 'LC/APC - FC/APC',
+      [lang === 'en' ? 'Insertion Loss' : '插入损耗']: '< 0.5 dB',
+      [lang === 'en' ? 'Extinction Ratio' : '消光比']: '≥ 20 dB',
+      [lang === 'en' ? 'Length' : '长度']: '2 m',
+      [lang === 'en' ? 'Jacket' : '护套']: '2.0mm PVC',
+    },
+    icon: '🔵',
+  },
+  {
+    id: 'pm-custom',
+    name: lang === 'en' ? 'Custom PM Patch Cord' : '定制保偏跳线',
+    model: 'FL-PM-CUSTOM',
+    specs: {
+      [lang === 'en' ? 'Fiber Type' : '光纤类型']: lang === 'en' ? 'PM630/780/980/1310/1550' : 'PM630/780/980/1310/1550',
+      [lang === 'en' ? 'Connector' : '连接器']: lang === 'en' ? 'Any combination' : '任意组合',
+      [lang === 'en' ? 'Length' : '长度']: lang === 'en' ? '0.1m - 100m' : '0.1m - 100m',
+      [lang === 'en' ? 'Color' : '颜色']: lang === 'en' ? 'White/Red/Blue/Yellow' : '白/红/蓝/黄',
+    },
+    icon: '🔧',
+    badge: lang === 'en' ? 'Custom' : '定制',
+    badgeColor: 'bg-blue-500',
+  },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'PM Fiber Patch Cords – FiberLink' : '保偏光纤跳线 – FiberLink'}
+  description={lang === 'en'
+    ? 'Panda-type PM fiber patch cords with ultra-low insertion loss (< 0.3 dB) and high extinction ratio (≥ 25 dB) for fiber laser, sensing and quantum communication applications.'
+    : '熊猫型保偏光纤跳线，插损 < 0.3 dB，消光比 ≥ 25 dB，适用于光纤激光器、光学传感及量子通信系统。'}
+  schema={[productSchema, faqSchema, howToSchema]}
+>
+  <Breadcrumb
+    lang={lang}
+    items={[{ label: lang === 'en' ? 'Products' : '产品', href: '/' }]}
+    current={lang === 'en' ? 'PM Patch Cords' : '保偏光纤跳线'}
+  />
+
+  <!-- Category header -->
+  <section class="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-4xl">🔵</span>
+        <div>
+          <h1 class="text-3xl font-bold">
+            {lang === 'en' ? 'Polarization Maintaining (PM) Patch Cords' : '保偏光纤跳线 (PM Patch Cord)'}
+          </h1>
+          <p class="text-blue-200 mt-1">
+            {lang === 'en' ? 'Panda-type PM fiber · Low IL · High ER · Custom lengths available' : '熊猫型保偏光纤 · 低插损 · 高消光比 · 支持定制长度'}
+          </p>
+        </div>
+      </div>
+      <!-- Key specs -->
+      <div class="flex flex-wrap gap-3 mt-6">
+        {[
+          lang === 'en' ? 'IL < 0.3dB' : '插损 < 0.3dB',
+          lang === 'en' ? 'ER ≥ 25/30dB' : '消光比 ≥ 25/30dB',
+          lang === 'en' ? 'PM630 ~ PM1550' : 'PM630 ~ PM1550',
+          lang === 'en' ? '0.9/2.0/3.0mm jacket' : '0.9/2.0/3.0mm护套',
+          'IEC 61300',
+        ].map(tag => (
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm text-white backdrop-blur-sm">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Products grid -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products.map(product => (
+          <div class="product-card relative">
+            {product.badge && (
+              <span class={`absolute top-3 right-3 text-xs text-white font-semibold px-2 py-1 rounded-full ${product.badgeColor}`}>
+                {product.badge}
+              </span>
+            )}
+            <!-- Image area -->
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 flex justify-center items-center">
+              <span class="text-6xl">{product.icon}</span>
+            </div>
+            <!-- Info -->
+            <div class="p-5">
+              <div class="text-xs text-gray-400 font-mono mb-1">{product.model}</div>
+              <h3 class="font-bold text-gray-900 mb-3">{product.name}</h3>
+              <!-- Specs table -->
+              <div class="overflow-x-auto mb-4">
+                <table class="w-full text-xs">
+                  <tbody>
+                    {Object.entries(product.specs).map(([k, v]) => (
+                      <tr class="border-b border-gray-100">
+                        <td class="py-1.5 pr-3 text-gray-500 font-medium whitespace-nowrap">{k}</td>
+                        <td class="py-1.5 text-gray-800">{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <!-- Actions -->
+              <div class="flex gap-2">
+                <a
+                  href={getLocalizedPath(`/products/pm-patch-cord/${product.id}`, lang)}
+                  class="flex-1 text-center py-2 text-sm font-medium text-brand-blue border border-brand-blue rounded hover:bg-brand-blue hover:text-white transition-colors"
+                >
+                  {lang === 'en' ? 'Details' : '查看详情'}
+                </a>
+                <button
+                  onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${product.model}'}}))`}
+                  class="flex-1 py-2 text-sm font-medium bg-brand-blue text-white rounded hover:bg-brand-blue-dark transition-colors"
+                >
+                  {lang === 'en' ? 'Inquire' : '询价'}
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Custom CTA -->
+      <div class="mt-10 bg-blue-600 rounded-2xl p-8 text-white text-center">
+        <h3 class="text-2xl font-bold mb-2">
+          {lang === 'en' ? 'Need Custom Specifications?' : '需要定制规格？'}
+        </h3>
+        <p class="text-blue-100 mb-6">
+          {lang === 'en'
+            ? 'Any connector combination, length (0.1m–100m), wavelength (630–1550nm), jacket type. Tell us your requirements!'
+            : '任意连接器组合、长度（0.1m-100m）、工作波长（630-1550nm）、护套类型，告诉我们您的需求！'}
+        </p>
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition-colors"
+        >
+          {lang === 'en' ? '📧 Send Custom Inquiry' : '📧 发送定制询盘'}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ 模块：问题+数据+解决方案框架（AI 搜索优化） -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+          {lang === 'en' ? 'Frequently Asked Questions' : '常见问题解答'}
+        </h2>
+        <p class="text-gray-500">
+          {lang === 'en'
+            ? 'Technical questions about PM fiber patch cords, answered with data.'
+            : '关于保偏光纤跳线的技术问题，用数据来解答。'}
+        </p>
+      </div>
+      <div class="space-y-4">
+        {faqs.map((faq, i) => (
+          <details class="group border border-gray-200 rounded-xl overflow-hidden">
+            <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-blue-50 transition-colors list-none">
+              <span class="font-semibold text-gray-900 pr-4">{faq.q}</span>
+              <svg class="w-5 h-5 text-gray-400 shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-5 pb-5 pt-2 text-gray-600 leading-relaxed border-t border-gray-100 bg-gray-50">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <!-- 选型指南 HowTo -->
+      <div class="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+        <h3 class="text-xl font-bold text-gray-900 mb-6">
+          {lang === 'en' ? '📋 How to Select the Right PM Patch Cord' : '📋 保偏跳线选型指南'}
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            {
+              step: '01',
+              title: lang === 'en' ? 'Confirm Wavelength' : '确认工作波长',
+              desc: lang === 'en' ? 'PM630 / PM780 / PM980 / PM1310 / PM1550' : '按激光器波长选 PM630/780/980/1310/1550',
+            },
+            {
+              step: '02',
+              title: lang === 'en' ? 'Choose Extinction Ratio' : '选择消光比等级',
+              desc: lang === 'en' ? '≥ 25 dB standard · ≥ 30 dB high-precision' : '标准款 ≥ 25 dB · 高精度测量 ≥ 30 dB',
+            },
+            {
+              step: '03',
+              title: lang === 'en' ? 'Select Connector' : '选择接头类型',
+              desc: lang === 'en' ? 'APC for low back-reflection · PC for general use' : 'APC 低回波 · PC 通用测试',
+            },
+            {
+              step: '04',
+              title: lang === 'en' ? 'Specify Length & Jacket' : '确认长度与护套',
+              desc: lang === 'en' ? '0.9mm / 2.0mm / 3.0mm armor · 0.1m–100m' : '0.9 / 2.0 / 3.0mm铠装 · 0.1m–100m',
+            },
+          ].map(item => (
+            <div class="flex gap-4 bg-white rounded-xl p-4 shadow-sm">
+              <div class="text-2xl font-black text-blue-200 shrink-0">{item.step}</div>
+              <div>
+                <div class="font-semibold text-gray-900 text-sm">{item.title}</div>
+                <div class="text-gray-500 text-xs mt-1">{item.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-6 text-center">
+          <button
+            onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-brand-blue text-white font-semibold rounded-lg hover:bg-brand-blue-dark transition-colors"
+          >
+            {lang === 'en' ? '🔍 Get a Selection Recommendation' : '🔍 获取选型建议'}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

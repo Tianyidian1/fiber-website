@@ -1,0 +1,142 @@
+# 推送代码到 GitHub - 操作步骤
+
+**你的账号信息**：
+- GitHub 用户名：Tianyidian1
+- 仓库名：fiber-website
+- 仓库地址：https://github.com/Tianyidian1/fiber-website.git
+
+---
+
+## 第一步：安装 Git（如果还没安装）
+
+1. 打开浏览器访问：https://git-scm.com/download/win
+2. 下载 Windows 版本（默认 64-bit）
+3. 双击安装程序，一路点击 Next（默认选项即可）
+4. 安装完成后重新打开 PowerShell
+
+**验证安装**：
+```powershell
+git --version
+```
+看到版本号说明安装成功。
+
+---
+
+## 第二步：配置 Git 身份信息
+
+打开 PowerShell，执行以下命令：
+
+```powershell
+git config --global user.name "Tianyidian1"
+git config --global user.email "你的邮箱@example.com"  ← 改成你的真实邮箱
+```
+
+---
+
+## 第三步：在 GitHub 创建仓库（手动操作）
+
+1. 访问 https://github.com/new
+2. 仓库名填：`fiber-website`
+3. 选择 **Public**（公开）
+4. 不要勾选 "Add a README file"、"Add .gitignore"、"Choose a license"
+5. 点击 **Create repository**
+
+创建后页面会显示仓库地址：`https://github.com/Tianyidian1/fiber-website.git`
+
+---
+
+## 第四步：初始化本地 Git 并推送代码
+
+打开 PowerShell，**依次执行**以下命令：
+
+```powershell
+# 进入项目目录
+cd "d:\360MoveData\Users\nikey\Desktop\光纤跳线网站"
+
+# 初始化 Git
+git init
+
+# 添加所有文件
+git add .
+
+# 提交代码
+git commit -m "初始提交：光纤跳线网站"
+
+# 修改分支名为 main
+git branch -M main
+
+# 关联远程仓库（这步很重要）
+git remote add origin https://github.com/Tianyidian1/fiber-website.git
+
+# 推送代码到 GitHub
+git push -u origin main
+```
+
+**如果推送时提示输入密码**：
+- GitHub 已经改用 Personal Access Token
+- 密码处填入 Token（不是你的账号密码）
+- 获取 Token 方法见下方说明
+
+---
+
+## 第五步：获取 GitHub Personal Access Token（用于推送认证）
+
+1. 登录 GitHub
+2. 右上角头像 → **Settings**
+3. 左侧最底部 → **Developer settings**
+4. **Personal access tokens** → **Tokens (classic)**
+5. **Generate new token** → **Generate new token (classic)**
+6. Note 填 `git push`，Expiration 选 `No expiration` 或较长时间
+7. 勾选 `repo` 权限
+8. 点击 **Generate token**
+9. **复制这个 Token**（只显示一次）
+
+推送时，用户名填 `Tianyidian1`，密码填这个 Token。
+
+---
+
+## 第六步：验证推送成功
+
+推送完成后，打开浏览器访问：
+https://github.com/Tianyidian1/fiber-website
+
+应该能看到你的所有代码文件。
+
+---
+
+## 第七步：连接到 Netlify
+
+代码推送到 GitHub 后：
+
+1. 访问 https://app.netlify.com/start
+2. 点击 **Import an existing project**
+3. 选择 **GitHub**
+4. 授权 Netlify 访问你的 GitHub
+5. 选择 `fiber-website` 仓库 → **Import**
+
+---
+
+## 常见问题
+
+### Q: 提示 "Support for password authentication was removed"
+A: GitHub 已禁用密码认证，必须使用 Personal Access Token（见第五步）
+
+### Q: 提示 "fatal: remote origin already exists"
+A: 删除已有的远程仓库关联：
+```powershell
+git remote remove origin
+git remote add origin https://github.com/Tianyidian1/fiber-website.git
+git push -u origin main
+```
+
+### Q: 中文路径问题
+A: 执行以下命令后重新推送：
+```powershell
+git config --global core.quotepath false
+```
+
+---
+
+## 需要帮助？
+
+遇到任何错误，把错误信息截图发给我。

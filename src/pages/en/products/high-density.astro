@@ -1,0 +1,102 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+
+const lang = 'en';
+
+const subCategories = [
+  {
+    id: 'mpo-cables',
+    icon: '🔲',
+    title: 'MPO Patch Cables',
+    desc: '12/24-fiber, Type A/B/C polarity, MTP® compatible for data center backbone cabling.',
+    products: [
+      { name: 'MPO-12 Female Type-A 3m', model: 'FL-MPO12-F-A-3M' },
+      { name: 'MPO-24 Male Type-B 5m', model: 'FL-MPO24-M-B-5M' },
+      { name: 'MPO-12 to 12xLC Breakout 3m', model: 'FL-MPO12-LC-3M' },
+    ],
+  },
+  {
+    id: 'mt-modules',
+    icon: '🟦',
+    title: 'MT Fiber Modules',
+    desc: '4/8/12-fiber MT connectors, black/green ferrule, for high-density fiber array connections.',
+    products: [
+      { name: 'MT-8 Black 2m', model: 'FL-MT8-BK-2M' },
+      { name: 'MT-12 Green 1m', model: 'FL-MT12-GR-1M' },
+      { name: 'MT-4 Custom', model: 'FL-MT4-CUSTOM' },
+    ],
+  },
+];
+---
+
+<Layout
+  title="High-Density Fiber Connectivity – FiberLink"
+  description="MPO fiber cables and MT modules for high-density data center and telecom applications."
+>
+  <Breadcrumb lang={lang} items={[{ label: 'Products', href: '/en/' }]} current="High-Density Connectivity" />
+
+  <section class="bg-gradient-to-r from-purple-700 to-indigo-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="text-4xl">🔲</span>
+        <div>
+          <h1 class="text-3xl font-bold">High-Density Fiber Connectivity</h1>
+          <p class="text-purple-200 mt-1">MPO cables & MT modules · Maximize rack density · Data center grade</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3 mt-4">
+        {['12/24 Fiber MPO', 'Type A/B/C Polarity', 'MTP® Compatible', 'MT-4/8/12', 'Custom Lengths'].map(tag => (
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm text-white backdrop-blur-sm">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 space-y-10">
+      {subCategories.map(sub => (
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+          <div class="p-6 border-b border-gray-100 bg-gradient-to-r from-purple-50 to-indigo-50">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">{sub.icon}</span>
+              <div>
+                <h2 class="text-xl font-bold text-gray-900">{sub.title}</h2>
+                <p class="text-gray-500 text-sm">{sub.desc}</p>
+              </div>
+            </div>
+          </div>
+          <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {sub.products.map(p => (
+                <div class="border border-gray-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-sm transition-all">
+                  <div class="text-xs font-mono text-gray-400 mb-1">{p.model}</div>
+                  <div class="font-medium text-gray-900 mb-3 text-sm">{p.name}</div>
+                  <button
+                    onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${p.model}'}}))`}
+                    class="w-full py-2 bg-purple-600 text-white text-xs font-medium rounded hover:bg-purple-700 transition-colors"
+                  >
+                    Inquire Now
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div class="mt-6 bg-purple-600 rounded-2xl p-8 text-white text-center">
+        <h3 class="text-2xl font-bold mb-2">Custom High-Density Solutions</h3>
+        <p class="text-purple-100 mb-6">
+          Custom MPO polarity, fiber count, connector type and length. Contact us for a project quote.
+        </p>
+        <button
+          onclick="document.dispatchEvent(new CustomEvent('open-inquiry'))"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-white text-purple-700 font-bold rounded-lg hover:bg-purple-50 transition-colors"
+        >
+          📧 Request Quote
+        </button>
+      </div>
+    </div>
+  </section>
+</Layout>

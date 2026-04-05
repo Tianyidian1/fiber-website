@@ -1,0 +1,281 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# 媒体文件存储路径
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# 网站语言
+locale: zh
+
+# 本地开发模式（开发时取消注释）
+# local_backend: true
+
+collections:
+
+  # ==========================================
+  # 产品管理
+  # ==========================================
+  - name: "products"
+    label: "🔵 产品管理"
+    label_singular: "产品"
+    folder: "src/content/products/zh"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: "model"
+    summary: "{{model}} – {{title}}"
+    fields:
+      - label: "产品名称（中文）"
+        name: "title"
+        widget: "string"
+        hint: "例：LC/APC 保偏跳线 1m"
+
+      - label: "产品英文名称"
+        name: "title_en"
+        widget: "string"
+        hint: "例：LC/APC PM Patch Cord 1m"
+
+      - label: "产品型号"
+        name: "model"
+        widget: "string"
+        hint: "例：FL-PM-LC/APC-1M（唯一标识符，不可重复）"
+
+      - label: "产品分类"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "保偏跳线 (PM Patch Cord)", value: "pm-patch-cord" }
+          - { label: "高密度连接 (High Density)", value: "high-density" }
+          - { label: "测试解决方案 (Test Solutions)", value: "test-solutions" }
+          - { label: "特种应用跳线 (Specialty)", value: "specialty" }
+
+      - label: "封面图片"
+        name: "cover_image"
+        widget: "image"
+        required: false
+        hint: "建议尺寸：800×800px，支持JPG/PNG/WebP"
+
+      - label: "产品描述（中文）"
+        name: "description"
+        widget: "markdown"
+        hint: "支持Markdown格式，将显示在产品详情页"
+
+      - label: "产品描述（英文）"
+        name: "description_en"
+        widget: "markdown"
+        required: false
+
+      - label: "技术规格参数"
+        name: "specs"
+        widget: "list"
+        summary: "{{fields.key}}: {{fields.value}}"
+        fields:
+          - { label: "参数名称", name: "key", widget: "string", hint: "例：插入损耗" }
+          - { label: "参数值", name: "value", widget: "string", hint: "例：< 0.3 dB" }
+          - { label: "英文参数名", name: "key_en", widget: "string", required: false, hint: "例：Insertion Loss" }
+
+      - label: "应用场景标签"
+        name: "applications"
+        widget: "list"
+        allow_add: true
+        field:
+          label: "应用场景"
+          name: "app"
+          widget: "string"
+          hint: "例：光纤激光、光纤传感、量子通信"
+
+      - label: "是否热销（显示标签）"
+        name: "featured"
+        widget: "boolean"
+        default: false
+
+      - label: "库存状态"
+        name: "stock"
+        widget: "select"
+        default: "in-stock"
+        options:
+          - { label: "✅ 现货", value: "in-stock" }
+          - { label: "🔧 定制生产", value: "made-to-order" }
+          - { label: "🚫 暂无库存", value: "out-of-stock" }
+
+      - label: "SEO 标题（中文）"
+        name: "seo_title"
+        widget: "string"
+        required: false
+        hint: "留空则自动使用产品名称，建议不超过60字符"
+
+      - label: "SEO 描述（中文）"
+        name: "seo_description"
+        widget: "text"
+        required: false
+        hint: "建议不超过160字符，将显示在搜索引擎结果中"
+
+      - label: "相关产品型号"
+        name: "related_products"
+        widget: "list"
+        required: false
+        allow_add: true
+        field:
+          label: "产品型号"
+          name: "model"
+          widget: "string"
+          hint: "填写相关产品的型号，例：FL-PM-FC/PC-2M"
+
+      - label: "规格书PDF链接"
+        name: "datasheet_url"
+        widget: "string"
+        required: false
+        hint: "上传PDF后填写路径，例：/datasheets/FL-PM-LC-APC-1M.pdf"
+
+      - label: "排序权重"
+        name: "sort_order"
+        widget: "number"
+        default: 100
+        hint: "数值越小越靠前，默认100"
+
+  # ==========================================
+  # 英文产品内容
+  # ==========================================
+  - name: "products_en"
+    label: "🌐 产品管理（英文）"
+    label_singular: "产品（英文）"
+    folder: "src/content/products/en"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Name (EN)", name: "title", widget: "string" }
+      - { label: "Model", name: "model", widget: "string" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "PM Patch Cord", value: "pm-patch-cord" }
+          - { label: "High Density", value: "high-density" }
+          - { label: "Test Solutions", value: "test-solutions" }
+          - { label: "Specialty", value: "specialty" }
+      - { label: "Description (EN)", name: "description", widget: "markdown" }
+      - label: "Specifications"
+        name: "specs"
+        widget: "list"
+        fields:
+          - { label: "Parameter", name: "key", widget: "string" }
+          - { label: "Value", name: "value", widget: "string" }
+
+  # ==========================================
+  # Banner 管理
+  # ==========================================
+  - name: "banners"
+    label: "🖼️ Banner 管理"
+    label_singular: "Banner"
+    folder: "src/content/banners"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{order}})"
+    fields:
+      - label: "Banner 标题（中文）"
+        name: "title"
+        widget: "string"
+
+      - label: "Banner 标题（英文）"
+        name: "title_en"
+        widget: "string"
+
+      - label: "副标题/标签（中文）"
+        name: "subtitle"
+        widget: "string"
+        required: false
+
+      - label: "副标题/标签（英文）"
+        name: "subtitle_en"
+        widget: "string"
+        required: false
+
+      - label: "描述文字（中文）"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "描述文字（英文）"
+        name: "description_en"
+        widget: "text"
+        required: false
+
+      - label: "Banner 图片"
+        name: "image"
+        widget: "image"
+        required: false
+        hint: "建议尺寸：1920×600px，背景图片"
+
+      - label: "按钮文字（中文）"
+        name: "btn_text"
+        widget: "string"
+        default: "立即询价"
+
+      - label: "按钮文字（英文）"
+        name: "btn_text_en"
+        widget: "string"
+        default: "Inquire Now"
+
+      - label: "按钮链接"
+        name: "btn_href"
+        widget: "string"
+        hint: "例：/products/pm-patch-cord"
+
+      - label: "背景色主题"
+        name: "bg_class"
+        widget: "select"
+        default: "blue"
+        options:
+          - { label: "科技蓝", value: "blue" }
+          - { label: "紫色", value: "purple" }
+          - { label: "青绿", value: "teal" }
+          - { label: "橙红", value: "orange" }
+          - { label: "深灰", value: "dark" }
+
+      - label: "启用状态"
+        name: "enabled"
+        widget: "boolean"
+        default: true
+
+      - label: "排序（数字越小越靠前）"
+        name: "order"
+        widget: "number"
+        default: 10
+
+  # ==========================================
+  # 基础设置 – 联系信息
+  # ==========================================
+  - name: "settings"
+    label: "⚙️ 基础设置"
+    files:
+      - label: "联系信息"
+        name: "contact"
+        file: "src/content/settings/contact.json"
+        fields:
+          - { label: "公司名称（中文）", name: "company_name_zh", widget: "string", default: "FiberLink Technology" }
+          - { label: "公司名称（英文）", name: "company_name_en", widget: "string", default: "FiberLink Technology Co., Ltd." }
+          - { label: "联系电话", name: "phone", widget: "string", hint: "例：+86-400-000-0000" }
+          - { label: "备用电话", name: "phone2", widget: "string", required: false }
+          - { label: "销售邮箱", name: "email_sales", widget: "string", default: "sales@fiberlink.com" }
+          - { label: "通用邮箱", name: "email_info", widget: "string", default: "info@fiberlink.com" }
+          - { label: "公司地址（中文）", name: "address_zh", widget: "string" }
+          - { label: "公司地址（英文）", name: "address_en", widget: "string" }
+          - { label: "微信号", name: "wechat", widget: "string", required: false }
+          - { label: "LinkedIn 链接", name: "linkedin", widget: "string", required: false }
+          - { label: "Google Maps 嵌入代码", name: "maps_embed", widget: "text", required: false, hint: "从 Google Maps 复制 iframe 代码" }
+          - { label: "Formspree Form ID", name: "formspree_id", widget: "string", hint: "在 formspree.io 注册后获取，替换表单提交目标" }
+
+      - label: "SEO & 元信息"
+        name: "seo"
+        file: "src/content/settings/seo.json"
+        fields:
+          - { label: "网站标题后缀", name: "site_name", widget: "string", default: "FiberLink" }
+          - { label: "首页 Meta 描述（中文）", name: "home_desc_zh", widget: "text" }
+          - { label: "首页 Meta 描述（英文）", name: "home_desc_en", widget: "text" }
+          - { label: "默认 OG 图片", name: "og_image", widget: "image", required: false }
+          - { label: "Google Analytics ID", name: "ga_id", widget: "string", required: false, hint: "例：G-XXXXXXXXXX" }
+          - { label: "百度统计代码", name: "baidu_analytics", widget: "string", required: false }

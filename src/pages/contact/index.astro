@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/index';
+import ContactForm from '../../components/ui/ContactForm.tsx';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const faqItems = [
+  {
+    qZh: '最小起订量是多少？',
+    qEn: 'What is the minimum order quantity?',
+    aZh: '标准规格产品无最小起订量（MOQ=1），定制产品MOQ通常为10-50pcs，具体以询价为准。',
+    aEn: 'Standard products have no MOQ (MOQ=1). Custom products typically require 10-50pcs MOQ, subject to inquiry.',
+  },
+  {
+    qZh: '支持哪些付款方式？',
+    qEn: 'What payment methods do you accept?',
+    aZh: '支持T/T（电汇）、PayPal、信用卡（Stripe）、西联汇款等主要国际付款方式。',
+    aEn: 'We accept T/T (wire transfer), PayPal, credit card (Stripe), and Western Union.',
+  },
+  {
+    qZh: '是否提供样品？',
+    qEn: 'Do you offer samples?',
+    aZh: '是的，我们提供产品样品（通常按成本收费），以便您在正式下单前评估产品质量。',
+    aEn: 'Yes, we offer product samples (usually at cost) so you can evaluate quality before placing a full order.',
+  },
+  {
+    qZh: '产品质保期多长？',
+    qEn: 'What is the warranty period?',
+    aZh: '所有产品提供12个月质保，因制造缺陷导致的问题我们将免费维修或更换。',
+    aEn: 'All products carry a 12-month warranty. Manufacturing defects will be repaired or replaced free of charge.',
+  },
+  {
+    qZh: '能定制特殊规格吗？',
+    qEn: 'Can you make custom specifications?',
+    aZh: '可以！我们支持定制任意长度（0.1m–100m）、连接器类型、工作波长、护套颜色及特殊封装要求。',
+    aEn: 'Yes! We support custom lengths (0.1m–100m), connector types, wavelengths, jacket colors, and special packaging.',
+  },
+];
+---
+
+<Layout
+  title={lang === 'en' ? 'Contact FiberLink – Get a Quote' : '联系我们 – FiberLink 光纤跳线'}
+  description={lang === 'en'
+    ? 'Contact FiberLink for product inquiries, custom orders, and technical support. We reply within 24 hours.'
+    : '联系FiberLink获取产品询价、定制订单和技术支持，我们24小时内回复。'}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-brand-blue to-brand-blue-dark text-white py-16">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-3">{t('contact.title')}</h1>
+      <p class="text-blue-200 text-lg">
+        {lang === 'en'
+          ? 'Get a quote or technical support — we reply within 24 hours'
+          : '获取报价或技术支持，我们24小时内回复'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact info cards + Form -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <!-- Contact info -->
+        <div class="space-y-6">
+          <h2 class="text-xl font-bold text-gray-900 mb-4">
+            {lang === 'en' ? 'Get in Touch' : '联系方式'}
+          </h2>
+
+          {[
+            {
+              icon: '📍',
+              titleZh: '公司地址',
+              titleEn: 'Address',
+              valueZh: '中国广东省深圳市科技园光纤路1号 518057',
+              valueEn: 'No.1 Fiber Road, Shenzhen Science Park, Shenzhen, Guangdong, China 518057',
+            },
+            {
+              icon: '📞',
+              titleZh: '联系电话',
+              titleEn: 'Phone',
+              valueZh: '+86-400-000-0000\n+86-755-0000-0000',
+              valueEn: '+86-400-000-0000\n+86-755-0000-0000',
+              href: 'tel:+86-400-000-0000',
+            },
+            {
+              icon: '📧',
+              titleZh: '电子邮箱',
+              titleEn: 'Email',
+              valueZh: 'info@fiberlink.com\nsales@fiberlink.com',
+              valueEn: 'info@fiberlink.com\nsales@fiberlink.com',
+              href: 'mailto:info@fiberlink.com',
+            },
+            {
+              icon: '🕐',
+              titleZh: '工作时间',
+              titleEn: 'Business Hours',
+              valueZh: '周一至周五 09:00–18:00\n(UTC+8，北京时间)',
+              valueEn: 'Monday–Friday 09:00–18:00\n(UTC+8 Beijing Time)',
+            },
+          ].map(item => (
+            <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
+              <span class="text-2xl flex-shrink-0">{item.icon}</span>
+              <div>
+                <div class="font-semibold text-gray-900 text-sm mb-1">
+                  {lang === 'en' ? item.titleEn : item.titleZh}
+                </div>
+                {item.href ? (
+                  <a href={item.href} class="text-brand-blue hover:underline text-sm whitespace-pre-line">
+                    {lang === 'en' ? item.valueEn : item.valueZh}
+                  </a>
+                ) : (
+                  <p class="text-gray-600 text-sm whitespace-pre-line">
+                    {lang === 'en' ? item.valueEn : item.valueZh}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+
+          <!-- WeChat QR placeholder -->
+          <div class="p-4 bg-green-50 border border-green-200 rounded-xl text-center">
+            <div class="text-3xl mb-2">💬</div>
+            <div class="font-medium text-gray-800 text-sm mb-1">
+              {lang === 'en' ? 'WeChat' : '微信咨询'}
+            </div>
+            <div class="text-xs text-gray-500">
+              {lang === 'en' ? 'Scan QR code to chat' : '扫码添加微信'}
+            </div>
+            <div class="mt-3 w-20 h-20 bg-gray-200 rounded mx-auto flex items-center justify-center text-xs text-gray-500">
+              QR Code
+            </div>
+          </div>
+        </div>
+
+        <!-- Inquiry form -->
+        <div class="lg:col-span-2">
+          <h2 class="text-xl font-bold text-gray-900 mb-6">
+            {t('contact.form.title')}
+          </h2>
+          <ContactForm client:load lang={lang} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map placeholder -->
+  <section class="py-8 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="rounded-2xl overflow-hidden h-64 bg-gray-200 flex items-center justify-center">
+        <div class="text-center text-gray-500">
+          <div class="text-4xl mb-2">🗺️</div>
+          <div class="text-sm font-medium">
+            {lang === 'en' ? 'Shenzhen Science Park, Guangdong, China' : '广东省深圳市科技园'}
+          </div>
+          <div class="text-xs text-gray-400 mt-1">
+            {lang === 'en' ? 'Google Maps embedded here' : '此处嵌入 Google Maps'}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-10">
+        {lang === 'en' ? 'Frequently Asked Questions' : '常见问题'}
+      </h2>
+      <div class="space-y-4">
+        {faqItems.map((faq, idx) => (
+          <details class="group bg-gray-50 rounded-xl overflow-hidden border border-gray-100">
+            <summary class="flex items-center justify-between cursor-pointer px-6 py-4 font-medium text-gray-900 hover:bg-gray-100 transition-colors">
+              <span>{lang === 'en' ? faq.qEn : faq.qZh}</span>
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-4 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
+              {lang === 'en' ? faq.aEn : faq.aZh}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

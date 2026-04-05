@@ -1,0 +1,209 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
+
+export async function getStaticPaths() {
+  return [
+    { params: { id: 'fl-pm-lc-apc-1m' }, props: { model: 'FL-PM-LC-APC-1M', name: 'PM Patch Cord LC/APC 1m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Coherent Detection', 'Fiber Sensors', 'R&D Lab'] } },
+    { params: { id: 'fl-pm-sc-upc-2m' }, props: { model: 'FL-PM-SC-UPC-2M', name: 'PM Patch Cord SC/UPC 2m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 2.0mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Sensing Systems', 'Research'] } },
+    { params: { id: 'fl-pm-lc-upc-3m' }, props: { model: 'FL-PM-LC-UPC-3M', name: 'PM Patch Cord LC/UPC 3m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Optical Coherence Tomography', 'Lab Use'] } },
+    { params: { id: 'fl-pm-ss-1m' }, props: { model: 'FL-PM-SS-1M', name: 'Armored PM Patch Cord 1m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'Stainless Steel', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Industrial Harsh Environment', 'Laser Processing', 'Rugged Applications'] } },
+  ];
+}
+
+const { id } = Astro.params;
+const { model, name, price, specs, applications } = Astro.props;
+
+const t = (key: string) => {
+  const en: Record<string, string> = {
+    'breadcrumb.products': 'Products',
+    'breadcrumb.pm': 'PM Patch Cord',
+    'breadcrumb.current': 'Product Details',
+    'gallery': 'Product Gallery',
+    'specs': 'Technical Specifications',
+    'orderGuide': 'Order Guide',
+    'connector': 'Connector Type',
+    'diameter': 'Cable Diameter',
+    'length': 'Cable Length',
+    'lengthOption1': '1m',
+    'lengthOption2': '2m',
+    'lengthOption3': '3m',
+    'lengthOption4': '5m',
+    'lengthOption5': '10m',
+    'lengthOption6': 'Custom',
+    'inquire': 'Inquire Now',
+    'inquiryDesc': 'Please fill out inquiry form with your requirements.',
+    'related': 'Related Products',
+    'backTo': 'Back to',
+    'insertionLoss': 'Insertion Loss',
+    'returnLoss': 'Return Loss',
+    'extinctionRatio': 'Extinction Ratio',
+    'fiberType': 'Fiber Type',
+    'jacket': 'Jacket Material',
+    'temp': 'Operating Temp',
+    'applications': 'Applications',
+  };
+  return en[key] || key;
+};
+---
+
+<Layout
+  title={`${name} – FiberLink`}
+  description={`High-quality PM patch cord ${model}. ${applications.join(', ')}.`}
+>
+  <Breadcrumb lang="en" items={[{ label: t('breadcrumb.products'), href: '/en/' }, { label: t('breadcrumb.pm'), href: '/en/products/pm-patch-cord' }]} current={t('breadcrumb.current')} />
+
+  <section class="py-12 max-w-7xl mx-auto px-4">
+    <div class="mb-4">
+      <a href="/en/products/pm-patch-cord" class="text-brand-blue hover:text-brand-dark text-sm font-medium inline-flex items-center gap-1">
+        ← {t('backTo')} {t('breadcrumb.pm')}
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div>
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-8 mb-4">
+          <div class="aspect-square bg-white rounded-lg shadow-inner flex items-center justify-center">
+            <span class="text-9xl">🔌</span>
+          </div>
+        </div>
+        <h2 class="text-lg font-bold text-gray-900 mb-3">{t('gallery')}</h2>
+        <div class="grid grid-cols-4 gap-2">
+          {[1,2,3,4].map(i => (
+            <div class="aspect-square bg-gray-100 rounded cursor-pointer hover:ring-2 hover:ring-brand-blue transition-all flex items-center justify-center">
+              <span class="text-2xl">📷</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div class="text-sm text-gray-500 font-mono mb-2">{model}</div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">{name}</h1>
+        <div class="text-2xl font-bold text-brand-blue mb-6">{price}</div>
+
+        <div class="space-y-3 mb-6">
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            <span>{t('insertionLoss')}: {specs[t('insertionLoss')]}</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-600">
+            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+            <span>{t('returnLoss')}: {specs[t('returnLoss')]}</span>
+          </div>
+        </div>
+
+        <button
+          onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${model}'}}))`}
+          class="w-full py-3 bg-brand-blue text-white font-bold text-lg rounded hover:bg-brand-dark transition-colors"
+        >
+          {t('inquire')}
+        </button>
+        <p class="text-xs text-gray-500 text-center mt-2">{t('inquiryDesc')}</p>
+      </div>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div>
+        <h2 class="text-xl font-bold text-gray-900 mb-4">{t('specs')}</h2>
+        <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+          <table class="w-full">
+            <tbody>
+              {Object.entries(specs).map(([k, v]) => (
+                <tr class="border-b border-gray-100 last:border-0">
+                  <td class="px-4 py-3 font-medium text-gray-700 bg-gray-50 w-1/2">{k}</td>
+                  <td class="px-4 py-3 text-gray-900">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-bold text-gray-900 mb-4">{t('applications')}</h2>
+        <div class="bg-white rounded-lg border border-gray-200 p-6">
+          <ul class="space-y-3">
+            {applications.map(app => (
+              <li class="flex items-start gap-2">
+                <span class="text-brand-blue mt-1">✓</span>
+                <span class="text-gray-700">{app}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">{t('orderGuide')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">{t('connector')}</label>
+          <select class="w-full p-2 border border-gray-300 rounded focus:ring-brand-blue focus:border-brand-blue">
+            <option>LC/APC</option>
+            <option>LC/UPC</option>
+            <option>SC/APC</option>
+            <option>SC/UPC</option>
+            <option>FC/UPC</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">{t('diameter')}</label>
+          <select class="w-full p-2 border border-gray-300 rounded focus:ring-brand-blue focus:border-brand-blue">
+            <option>0.9mm</option>
+            <option>2.0mm</option>
+            <option>3.0mm</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">{t('length')}</label>
+          <select class="w-full p-2 border border-gray-300 rounded focus:ring-brand-blue focus:border-brand-blue">
+            <option>{t('lengthOption1')}</option>
+            <option>{t('lengthOption2')}</option>
+            <option>{t('lengthOption3')}</option>
+            <option>{t('lengthOption4')}</option>
+            <option>{t('lengthOption5')}</option>
+            <option>{t('lengthOption6')}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-4">{t('related')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="product-card">
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex justify-center">
+            <span class="text-5xl">🔌</span>
+          </div>
+          <div class="p-4">
+            <div class="text-xs text-gray-400 font-mono mb-1">FL-PM-LC-APC-2M</div>
+            <h3 class="font-bold text-gray-900 mb-2">PM Patch Cord LC/APC 2m</h3>
+            <button class="w-full py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-dark">Inquire</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex justify-center">
+            <span class="text-5xl">🔌</span>
+          </div>
+          <div class="p-4">
+            <div class="text-xs text-gray-400 font-mono mb-1">FL-PM-SC-UPC-1M</div>
+            <h3 class="font-bold text-gray-900 mb-2">PM Patch Cord SC/UPC 1m</h3>
+            <button class="w-full py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-dark">Inquire</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 flex justify-center">
+            <span class="text-5xl">🔌</span>
+          </div>
+          <div class="p-4">
+            <div class="text-xs text-gray-400 font-mono mb-1">FL-PM-SS-2M</div>
+            <h3 class="font-bold text-gray-900 mb-2">Armored PM Patch Cord 2m</h3>
+            <button class="w-full py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-dark">Inquire</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

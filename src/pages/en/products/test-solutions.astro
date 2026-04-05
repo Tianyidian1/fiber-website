@@ -1,0 +1,106 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+
+const t = (key: string) => {
+  const en: Record<string, string> = {
+    'title': 'Fiber Optic Test Solutions',
+    'subtitle': 'OTDR · Light Source · Power Meter · Fault Location',
+    'breadcrumb.products': 'Products',
+    'breadcrumb.current': 'Test Solutions',
+    'range': 'Range',
+    'dynamicRange': 'Dynamic Range',
+    'resolution': 'Resolution',
+    'wavelength': 'Wavelength',
+    'display': 'Display',
+    'moduleSlots': 'Module Slots',
+    'interface': 'Interface',
+    'sourceWL': 'Source WL',
+    'powerRange': 'Power Range',
+    'accuracy': 'Accuracy',
+    'battery': 'Battery',
+    'protection': 'Protection',
+    'inquire': 'Inquire Now',
+    'popular': 'Popular',
+  };
+  return en[key] || key;
+};
+
+const products = [
+  {
+    icon: '📡',
+    name: 'Handheld OTDR FLT-A100',
+    model: 'FLT-A100',
+    spec: { 'Range': '0.1–120km', 'Dynamic Range': '36dB', 'Resolution': '0.1m', 'Wavelength': '1310/1550nm', 'Display': '7" Touch Screen' },
+    badge: t('popular'),
+  },
+  {
+    icon: '🔬',
+    name: 'Modular OTDR FLT-M200',
+    model: 'FLT-M200',
+    spec: { 'Range': '0.1–200km', 'Dynamic Range': '42dB', 'Module Slots': '2 expandable', 'Wavelength': '1310/1550/1625nm', 'Interface': 'USB/Ethernet' },
+  },
+  {
+    icon: '⚙️',
+    name: 'Light Source & Power Meter Kit',
+    model: 'FLT-LSP-01',
+    spec: { 'Source WL': '1310/1550nm', 'Power Range': '-70~+3dBm', 'Accuracy': '±0.1dB', 'Battery': '14h runtime', 'Protection': 'IP65' },
+  },
+];
+---
+
+<Layout
+  title="Fiber Optic Test Solutions – FiberLink"
+  description="Professional OTDR and fiber test equipment for field and lab fiber optic network testing."
+>
+  <Breadcrumb lang="en" items={[{ label: t('breadcrumb.products'), href: '/en/' }]} current={t('breadcrumb.current')} />
+
+  <section class="bg-gradient-to-r from-teal-700 to-cyan-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-4">
+        <span class="text-4xl">📡</span>
+        <div>
+          <h1 class="text-3xl font-bold">{t('title')}</h1>
+          <p class="text-teal-200 mt-1">{t('subtitle')}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {products.map(p => (
+          <div class="product-card">
+            <div class="bg-gradient-to-br from-teal-50 to-cyan-100 p-8 flex justify-center">
+              <span class="text-6xl">{p.icon}</span>
+            </div>
+            <div class="p-5">
+              {p.badge && <span class="text-xs bg-orange-500 text-white px-2 py-0.5 rounded-full font-medium mb-2 inline-block">{p.badge}</span>}
+              <div class="text-xs text-gray-400 font-mono mb-1">{p.model}</div>
+              <h3 class="font-bold text-gray-900 mb-3">{p.name}</h3>
+              <div class="overflow-x-auto mb-4">
+                <table class="w-full text-xs">
+                  <tbody>
+                    {Object.entries(p.spec).map(([k, v]) => (
+                      <tr class="border-b border-gray-100">
+                        <td class="py-1.5 pr-3 text-gray-500 font-medium whitespace-nowrap">{k}</td>
+                        <td class="py-1.5 text-gray-800">{v}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <button
+                onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${p.model}'}}))`}
+                class="w-full py-2.5 bg-teal-600 text-white text-sm font-medium rounded hover:bg-teal-700 transition-colors"
+              >
+                {t('inquire')}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
