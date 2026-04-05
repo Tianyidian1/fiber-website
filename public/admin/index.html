@@ -8,7 +8,7 @@
 </head>
 <body>
   <script>
-    // Initialize Netlify Identity
+    // Handle Identity URL hash (e.g., #token=xxx, #confirmation_token=xxx)
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
@@ -17,6 +17,15 @@
           });
         }
       });
+    }
+
+    // Handle password reset and confirmation tokens from email links
+    if (window.location.hash) {
+      const token = window.location.hash.replace('#', '');
+      if (token && window.netlifyIdentity) {
+        // Token will be handled by the Identity widget
+        console.log('Identity token detected:', token);
+      }
     }
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>

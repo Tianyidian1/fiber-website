@@ -6,15 +6,12 @@ publish = "dist"
 [build.environment]
   NODE_VERSION = "20"
 
-# Netlify Identity 配置
-[context.production.environment]
-  NETLIFY_AUTH_CLIENT_ID = "netlify-auth"
-
-# 重定向规则 - 修复 Identity 重定向问题
+# Netlify Identity API 端点重定向
 [[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
+  from = "/.netlify/identity/*"
+  to = "https://eclectic-zuccutto-65eed7.netlify.app/.netlify/identity/:splat"
   status = 200
+  force = true
 
 # 确保 /admin/ 路径正确处理
 [[redirects]]
