@@ -1,7 +1,23 @@
-# Cloudflare Pages 配置
+# Cloudflare Pages / Netlify 配置
 [build]
 command = "npm run build"
 publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+
+# Netlify Identity 配置
+[context.production.environment]
+  NETLIFY_AUTH_CLIENT_ID = "netlify-auth"
+
+# 重定向规则 - 修复 Identity 重定向问题
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# 确保 /admin/ 路径正确处理
+[[redirects]]
+  from = "/admin"
+  to = "/admin/"
+  status = 301
