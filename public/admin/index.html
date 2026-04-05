@@ -5,27 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FiberLink CMS – 后台管理</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .identity-widget {
+      width: 100%;
+      max-width: 400px;
+    }
+  </style>
 </head>
 <body>
+  <div id="netlify-identity-widget"></div>
   <script>
     // Handle Identity URL hash (e.g., #token=xxx, #confirmation_token=xxx)
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
+        console.log('Netlify Identity initialized:', user);
+
         if (!user) {
           window.netlifyIdentity.on("login", () => {
             document.location.href = "/admin/";
           });
         }
       });
-    }
 
-    // Handle password reset and confirmation tokens from email links
-    if (window.location.hash) {
-      const token = window.location.hash.replace('#', '');
-      if (token && window.netlifyIdentity) {
-        // Token will be handled by the Identity widget
-        console.log('Identity token detected:', token);
+      // Handle confirmation and reset tokens
+      if (window.location.hash) {
+        const hash = window.location.hash;
+        console.log('Hash detected:', hash);
+
+        // Automatically open the widget when token is present
+        if (hash.includes('#confirmation_token=') || hash.includes('#token=') || hash.includes('#recovery_token=')) {
+          window.netlifyIdentity.open();
+          console.log('Identity widget opened for token processing');
+        }
       }
+    } else {
+      console.error('Netlify Identity widget not loaded');
     }
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
