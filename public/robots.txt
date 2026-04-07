@@ -1,0 +1,12 @@
+# robots.txt for FiberLink 光纤跳线网站
+# https://eclectic-zuccutto-65eed7.netlify.app
+
+User-agent: *
+Allow: /
+
+# 禁止爬取后台和管理页面
+Disallow: /admin/
+Disallow: /.netlify/
+
+# Sitemap 位置
+Sitemap: https://eclectic-zuccutto-65eed7.netlify.app/sitemap.xml

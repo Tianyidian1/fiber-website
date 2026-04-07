@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 // import sitemap from '@astrojs/sitemap'; // Temporarily disabled for i18n compatibility
 
 export default defineConfig({
-  site: 'https://your-site-name.netlify.app',  // ← 部署到 Netlify 后，会自动生成这个域名
+  site: 'https://eclectic-zuccutto-65eed7.netlify.app',
   integrations: [
     react(),
     tailwind(),
