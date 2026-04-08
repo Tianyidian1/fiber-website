@@ -9,33 +9,33 @@ const t = useTranslations(lang);
 // FAQ 内容（问题+数据+解决方案框架）
 const faqs = lang === 'en' ? [
   {
-    q: 'What is a Panda Polarization-Maintaining (PM) Fiber Patch Cable and when do I need one?',
-    a: 'A Panda Polarization-Maintaining Fiber Patch Cable uses Panda-type or Bow-tie type fiber to maintain the polarization state of light transmission. It is required in fiber lasers, coherent optical communications, fiber optic gyroscopes, optical sensing, and quantum communication systems where ordinary single-mode fiber causes polarization mixing and measurement errors. Our Panda PM fiber patch cables achieve extinction ratio ≥ 25 dB, effectively eliminating polarization crosstalk.'
+    q: 'What is a Panda Polarization-Maintaining Fiber Patch Cable and when do I need one?',
+    a: 'A Panda Polarization-Maintaining Fiber Patch Cable uses Panda-type or Bow-tie type fiber to maintain the polarization state of light transmission. It is required in fiber lasers, coherent optical communications, fiber optic gyroscopes, optical sensing, and quantum communication systems where ordinary single-mode fiber causes polarization mixing and measurement errors. Our Panda Polarization-Maintaining Fiber Patch Cables achieve extinction ratio ≥ 25 dB, effectively eliminating polarization crosstalk.'
   },
   {
     q: 'What is extinction ratio (ER) and how high does it need to be?',
-    a: 'Extinction ratio measures the ability of PM fiber to suppress cross-polarization coupling. ≥ 20 dB meets basic requirements; ≥ 25 dB suits most fiber laser and sensing applications; ≥ 30 dB is for high-precision measurement or quantum optical systems. Our standard products reach ≥ 25 dB, with premium armored versions reaching ≥ 30 dB.'
+    a: 'Extinction ratio measures the ability of Polarization-Maintaining fiber to suppress cross-polarization coupling. ≥ 20 dB meets basic requirements; ≥ 25 dB suits most fiber laser and sensing applications; ≥ 30 dB is for high-precision measurement or quantum optical systems. Our standard products reach ≥ 25 dB, with premium armored versions reaching ≥ 30 dB.'
   },
   {
     q: 'How is insertion loss controlled? How does it affect my system?',
-    a: 'Insertion loss (IL) measures signal attenuation at the connection point. Our Panda PM fiber patch cables consistently achieve IL < 0.3 dB through precision grinding and 100% individual testing. For fiber laser systems, each 0.1 dB increase in insertion loss results in approximately 2% output power loss. We recommend budgeting for link loss in your system design.'
+    a: 'Insertion loss (IL) measures signal attenuation at the connection point. Our Panda Polarization-Maintaining Fiber Patch Cables consistently achieve IL < 0.3 dB through precision grinding and 100% individual testing. For fiber laser systems, each 0.1 dB increase in insertion loss results in approximately 2% output power loss. We recommend budgeting for link loss in your system design.'
   },
   {
     q: 'Which wavelengths and connector types are available?',
-    a: 'We support all mainstream PM fiber wavelengths: PM630, PM780, PM980, PM1310, PM1550. Connector types include FC/APC, FC/PC, SC/APC, LC/APC, ST/PC, and custom hybrid combinations. Length ranges from 0.1m to 100m. Contact us if your requirement is not listed — most custom configurations ship within 5–7 business days.'
+    a: 'We support all mainstream Polarization-Maintaining fiber wavelengths: PM630, PM780, PM980, PM1310, PM1550. Connector types include FC/APC, FC/PC, SC/APC, LC/APC, ST/PC, and custom hybrid combinations. Length ranges from 0.1m to 100m. Contact us if your requirement is not listed — most custom configurations ship within 5–7 business days.'
   },
   {
     q: 'What is the difference between APC and PC connectors? Which should I choose?',
     a: 'PC (Physical Contact) connectors have flat end faces with return loss of approximately -45 dB. APC (Angled Physical Contact) connectors are ground at 8°, achieving return loss better than -60 dB. For fiber lasers and sensing systems requiring low back-reflection, APC connectors are strongly recommended. For general transmission testing, PC connectors are sufficient.'
   },
   {
-    q: 'How do I know the slow and fast axis of a Panda PM fiber patch cable?',
-    a: 'We mark the slow axis direction on all Panda PM fiber patch cables with a color dot or printed label. Key axis position can also be identified using a polarization meter or cross-polarization inspection. When placing an order, please specify whether you need Panda or Bow-tie fiber type — the two have the same performance but differ in identifying the slow axis under a microscope.'
+    q: 'How do I know the slow and fast axis of a Panda Polarization-Maintaining Fiber Patch Cable?',
+    a: 'We mark the slow axis direction on all Panda Polarization-Maintaining Fiber Patch Cables with a color dot or printed label. Key axis position can also be identified using a polarization meter or cross-polarization inspection. When placing an order, please specify whether you need Panda or Bow-tie fiber type — the two have the same performance but differ in identifying the slow axis under a microscope.'
   },
 ] : [
   {
     q: '保偏光纤跳线是什么？我什么时候需要它？',
-    a: '保偏跳线（Panda PM fiber patch cable）使用熊猫型或领结型特种光纤，能够维持光的偏振态在传输过程中不变。在光纤激光器、相干光通信、光纤陀螺仪、光学传感和量子通信系统中必须使用它——普通单模光纤会导致偏振混叠，引发测量误差。我们的保偏跳线消光比 ≥ 25 dB，有效消除偏振串扰。'
+    a: '保偏跳线（Panda Polarization-Maintaining Fiber Patch Cable）使用熊猫型或领结型特种光纤，能够维持光的偏振态在传输过程中不变。在光纤激光器、相干光通信、光纤陀螺仪、光学传感和量子通信系统中必须使用它——普通单模光纤会导致偏振混叠，引发测量误差。我们的保偏跳线消光比 ≥ 25 dB，有效消除偏振串扰。'
   },
   {
     q: '消光比（ER）是什么？需要多高才够用？',
@@ -101,7 +101,7 @@ const howToSchema = {
     {
       "@type": "HowToStep",
       "name": lang === 'en' ? "Confirm wavelength" : "确认工作波长",
-      "text": lang === 'en' ? "Match the PM fiber wavelength to your laser or light source: PM630/780/980/1310/1550 nm." : "根据激光器或光源波长选择对应的保偏光纤型号：PM630/780/980/1310/1550。"
+      "text": lang === 'en' ? "Match the Polarization-Maintaining fiber wavelength to your laser or light source: PM630/780/980/1310/1550 nm." : "根据激光器或光源波长选择对应的保偏光纤型号：PM630/780/980/1310/1550。"
     },
     {
       "@type": "HowToStep",
@@ -216,14 +216,14 @@ const products = [
 <Layout
   title={lang === 'en' ? 'Panda Polarization-Maintaining Fiber Patch Cables – FiberLink' : '保偏光纤跳线 – FiberLink'}
   description={lang === 'en'
-    ? 'Panda-type Polarization-Maintaining (PM) fiber patch cables with ultra-low insertion loss (< 0.3 dB) and high extinction ratio (≥ 25 dB) for fiber laser, sensing and quantum communication applications.'
+    ? 'Panda-type Polarization-Maintaining fiber patch cables with ultra-low insertion loss (< 0.3 dB) and high extinction ratio (≥ 25 dB) for fiber laser, sensing and quantum communication applications.'
     : '熊猫型保偏光纤跳线，插损 < 0.3 dB，消光比 ≥ 25 dB，适用于光纤激光器、光学传感及量子通信系统。'}
   schema={[productSchema, faqSchema, howToSchema]}
 >
   <Breadcrumb
     lang={lang}
     items={[{ label: lang === 'en' ? 'Products' : '产品', href: '/' }]}
-    current={lang === 'en' ? 'Panda PM Fiber Patch Cables' : '保偏光纤跳线'}
+    current={lang === 'en' ? 'Panda Polarization-Maintaining Fiber Patch Cables' : '保偏光纤跳线'}
   />
 
   <!-- Category header -->
@@ -233,7 +233,7 @@ const products = [
         <span class="text-4xl">🔵</span>
         <div>
           <h1 class="text-3xl font-bold">
-            {lang === 'en' ? 'Panda Polarization-Maintaining Fiber Patch Cables' : '保偏光纤跳线 (Panda PM fiber patch cable)'}
+            {lang === 'en' ? 'Panda Polarization-Maintaining Fiber Patch Cables' : '保偏光纤跳线 (Panda Polarization-Maintaining Fiber Patch Cable)'}
           </h1>
           <p class="text-blue-200 mt-1">
             {lang === 'en' ? 'Panda-type PM fiber · Low IL · High ER · Custom lengths available' : '熊猫型保偏光纤 · 低插损 · 高消光比 · 支持定制长度'}
@@ -336,7 +336,7 @@ const products = [
         </h2>
         <p class="text-gray-500">
           {lang === 'en'
-            ? 'Technical questions about PM fiber patch cords, answered with data.'
+            ? 'Technical questions about Polarization-Maintaining fiber patch cables, answered with data.'
             : '关于保偏光纤跳线的技术问题，用数据来解答。'}
         </p>
       </div>
@@ -359,7 +359,7 @@ const products = [
       <!-- 选型指南 HowTo -->
       <div class="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
         <h3 class="text-xl font-bold text-gray-900 mb-6">
-          {lang === 'en' ? '📋 How to Select the Right Panda PM Fiber Patch Cable' : '📋 保偏跳线选型指南'}
+          {lang === 'en' ? '📋 How to Select the Right Panda Polarization-Maintaining Fiber Patch Cable' : '📋 保偏跳线选型指南'}
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[

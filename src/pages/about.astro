@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/index';
 
@@ -11,7 +11,7 @@ const timeline = [
     titleZh: '公司创立',
     titleEn: 'Founded',
     descZh: '在深圳成立，专注于保偏光纤产品研发与生产。',
-    descEn: 'Founded in Shenzhen, focused on PM fiber product R&D and manufacturing.',
+    descEn: 'Founded in Shenzhen, focused on Polarization-Maintaining fiber product R&D and manufacturing.',
   },
   {
     year: '2013',
@@ -111,7 +111,7 @@ const team = [
 ---
 
 <Layout
-  title={lang === 'en' ? 'About FiberLink – PM Fiber Optic Solutions' : '关于我们 – FiberLink 光纤跳线专家'}
+  title={lang === 'en' ? 'About FiberLink – Polarization-Maintaining Fiber Optic Solutions' : '关于我们 – FiberLink 光纤跳线专家'}
   description={lang === 'en'
     ? 'FiberLink is a professional fiber optic manufacturer with 10+ years of experience, serving 50+ countries worldwide.'
     : 'FiberLink是专业光纤跳线制造商，拥有10+年行业经验，产品销往全球50+国家。'}
@@ -145,7 +145,7 @@ const team = [
           </p>
           <p class="text-gray-600 leading-relaxed">
             {lang === 'en'
-              ? 'From precision PM fiber patch cords for quantum computing research to high-density MPO systems for cloud data centers, our solutions power the world\'s most advanced optical systems.'
+              ? 'From precision Polarization-Maintaining fiber patch cables for quantum computing research to high-density MPO systems for cloud data centers, our solutions power the world\'s most advanced optical systems.'
               : '从量子计算研究用精密保偏跳线，到云数据中心用高密度MPO系统，我们的解决方案驱动着世界上最先进的光学系统。'}
           </p>
         </div>

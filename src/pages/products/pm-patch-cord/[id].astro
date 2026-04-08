@@ -9,10 +9,10 @@ export function getStaticPaths() {
       id: 'pm-lc-apc-1m',
       slug: 'pm-lc-apc-1m',
       nameZh: 'LC/APC 保偏跳线 1m',
-      nameEn: 'LC/APC Panda PM fiber patch cable 1m',
+      nameEn: 'LC/APC Panda Polarization-Maintaining Fiber Patch Cable 1m',
       model: 'FL-PM-LC/APC-1M',
       descZh: '采用熊猫型保偏光纤（PM1550），LC/APC连接器，专为需要精确偏振控制的应用设计。超低插入损耗保证信号完整性，高消光比确保偏振维持性能。广泛应用于相干光通信、光纤传感、量子通信及激光系统。',
-      descEn: 'Panda-type PM fiber (PM1550) with LC/APC connectors, designed for applications requiring precise polarization control. Ultra-low insertion loss ensures signal integrity, and high extinction ratio guarantees PM performance. Widely used in coherent optical communication, fiber sensing, quantum communication, and laser systems.',
+      descEn: 'Panda-type Polarization-Maintaining fiber (PM1550) with LC/APC connectors, designed for applications requiring precise polarization control. Ultra-low insertion loss ensures signal integrity, and high extinction ratio guarantees Polarization-Maintaining performance. Widely used in coherent optical communication, fiber sensing, quantum communication, and laser systems.',
       specsZh: {
         '光纤类型': 'PM1550 熊猫型 (Panda)',
         '工作波长': '1550 nm',
@@ -58,7 +58,7 @@ export function getStaticPaths() {
       id: 'pm-fc-pc-2m',
       slug: 'pm-fc-pc-2m',
       nameZh: 'FC/PC 保偏跳线 2m',
-      nameEn: 'FC/PC Panda PM fiber patch cable 2m',
+      nameEn: 'FC/PC Panda Polarization-Maintaining Fiber Patch Cable 2m',
       model: 'FL-PM-FC/PC-2M',
       descZh: '熊猫型PM1550保偏光纤，FC/PC连接器，2.0mm PVC护套，适用于实验室和工程现场。',
       descEn: 'Panda PM1550 fiber with FC/PC connector, 2.0mm PVC jacket, for lab and field applications.',
@@ -91,7 +91,7 @@ export function getStaticPaths() {
       id: 'pm-sc-apc-armored',
       slug: 'pm-sc-apc-armored',
       nameZh: 'SC/APC 保偏铠装跳线 1m',
-      nameEn: 'SC/APC PM Armored Patch Cord 1m',
+      nameEn: 'SC/APC Polarization-Maintaining Armored Patch Cable 1m',
       model: 'FL-PM-SC/APC-ARM-1M',
       descZh: '熊猫型PM1550保偏光纤，SC/APC连接器，3.0mm不锈钢铠装护套，高消光比≥30dB，适用于恶劣环境。',
       descEn: 'Panda PM1550 with SC/APC, 3.0mm stainless steel armored jacket, ER≥30dB, for harsh environments.',
@@ -122,10 +122,10 @@ export function getStaticPaths() {
       id: 'pm-lc-fc-hybrid',
       slug: 'pm-lc-fc-hybrid',
       nameZh: 'LC/APC-FC/APC 保偏混接跳线 2m',
-      nameEn: 'LC/APC-FC/APC PM Hybrid Patch Cord 2m',
+      nameEn: 'LC/APC-FC/APC Polarization-Maintaining Hybrid Patch Cable 2m',
       model: 'FL-PM-LC-FC-HYB-2M',
       descZh: 'LC/APC 转 FC/APC 混合接头保偏跳线，适用于不同接口设备互联。',
-      descEn: 'LC/APC to FC/APC hybrid Panda PM fiber patch cable for interconnecting equipment with different connector interfaces.',
+      descEn: 'LC/APC to FC/APC hybrid Panda Polarization-Maintaining Fiber Patch Cable for interconnecting equipment with different connector interfaces.',
       specsZh: {
         '光纤类型': 'PM1550 熊猫型',
         '连接器A端': 'LC/APC',
@@ -183,7 +183,7 @@ const applicationLabels: Record<string, { zh: string; en: string }> = {
     lang={lang}
     items={[
       { label: lang === 'en' ? 'Products' : '产品', href: '/' },
-      { label: lang === 'en' ? 'Panda PM Fiber Patch Cables' : '保偏跳线', href: '/products/pm-patch-cord' },
+      { label: lang === 'en' ? 'Panda Polarization-Maintaining Fiber Patch Cables' : '保偏跳线', href: '/products/pm-patch-cord' },
     ]}
     current={name}
   />
@@ -347,7 +347,7 @@ const applicationLabels: Record<string, { zh: string; en: string }> = {
               {relId.toUpperCase().replace(/-/g, ' ')}
             </div>
             <div class="text-sm text-gray-700 group-hover:text-brand-blue font-medium line-clamp-2">
-              {lang === 'en' ? 'Panda PM fiber patch cable' : '保偏跳线'}
+              {lang === 'en' ? 'Panda Polarization-Maintaining Fiber Patch Cable' : '保偏跳线'}
             </div>
           </a>
         ))}

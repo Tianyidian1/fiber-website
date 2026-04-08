@@ -1,13 +1,13 @@
----
+﻿---
 import Layout from '../../../../layouts/Layout.astro';
 import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
 
 export async function getStaticPaths() {
   return [
-    { params: { id: 'fl-pm-lc-apc-1m' }, props: { model: 'FL-PM-LC-APC-1M', name: 'LC/APC Panda Polarization-Maintaining Fiber Patch Cable 1m', price: 'Inquiry', alibabaLink: 'https://alibaba.com/demo-product', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Coherent Detection', 'Fiber Sensors', 'R&D Lab'] } },
-    { params: { id: 'fl-pm-sc-upc-2m' }, props: { model: 'FL-PM-SC-UPC-2M', name: 'SC/UPC Panda Polarization-Maintaining Fiber Patch Cable 2m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 2.0mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Sensing Systems', 'Research'] } },
-    { params: { id: 'fl-pm-lc-upc-3m' }, props: { model: 'FL-PM-LC-UPC-3M', name: 'LC/UPC Panda Polarization-Maintaining Fiber Patch Cable 3m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Optical Coherence Tomography', 'Lab Use'] } },
-    { params: { id: 'fl-pm-ss-1m' }, props: { model: 'FL-PM-SS-1M', name: 'Armored Panda Polarization-Maintaining Fiber Patch Cable 1m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'Stainless Steel', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Industrial Harsh Environment', 'Laser Processing', 'Rugged Applications'] } },
+    { params: { id: 'fl-pm-lc-apc-1m' }, props: { model: 'FL-PM-LC-APC-1M', name: 'LC/APC Panda Polarization-Maintaining Fiber Patch Cable 1m', price: 'Inquiry', alibabaLink: 'https://alibaba.com/demo-product', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA (Polarization-Maintaining)', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Coherent Detection', 'Fiber Sensors', 'R&D Lab'] } },
+    { params: { id: 'fl-pm-sc-upc-2m' }, props: { model: 'FL-PM-SC-UPC-2M', name: 'SC/UPC Panda Polarization-Maintaining Fiber Patch Cable 2m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA (Polarization-Maintaining)', 'Jacket Material': 'PVC 2.0mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Sensing Systems', 'Research'] } },
+    { params: { id: 'fl-pm-lc-upc-3m' }, props: { model: 'FL-PM-LC-UPC-3M', name: 'LC/UPC Panda Polarization-Maintaining Fiber Patch Cable 3m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA (Polarization-Maintaining)', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Optical Coherence Tomography', 'Lab Use'] } },
+    { params: { id: 'fl-pm-ss-1m' }, props: { model: 'FL-PM-SS-1M', name: 'Armored Panda Polarization-Maintaining Fiber Patch Cable 1m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA (Polarization-Maintaining)', 'Jacket Material': 'Stainless Steel', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Industrial Harsh Environment', 'Laser Processing', 'Rugged Applications'] } },
   ];
 }
 
@@ -17,7 +17,7 @@ const { model, name, price, alibabaLink, specs, applications } = Astro.props;
 const t = (key: string) => {
   const en: Record<string, string> = {
     'breadcrumb.products': 'Products',
-    'breadcrumb.pm': 'Panda PM Fiber Patch Cables',
+    'breadcrumb.pm': 'Panda Polarization-Maintaining Fiber Patch Cables',
     'breadcrumb.current': 'Product Details',
     'gallery': 'Product Gallery',
     'specs': 'Technical Specifications',
@@ -196,7 +196,7 @@ const t = (key: string) => {
           </div>
           <div class="p-4">
             <div class="text-xs text-gray-400 font-mono mb-1">FL-PM-LC-APC-2M</div>
-            <h3 class="font-bold text-gray-900 mb-2">Panda PM Fiber Patch Cable LC/APC 2m</h3>
+            <h3 class="font-bold text-gray-900 mb-2">Panda Polarization-Maintaining Fiber Patch Cable LC/APC 2m</h3>
             <button class="w-full py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-dark">Inquire</button>
           </div>
         </div>
@@ -206,7 +206,7 @@ const t = (key: string) => {
           </div>
           <div class="p-4">
             <div class="text-xs text-gray-400 font-mono mb-1">FL-PM-SC-UPC-1M</div>
-            <h3 class="font-bold text-gray-900 mb-2">Panda PM Fiber Patch Cable SC/UPC 1m</h3>
+            <h3 class="font-bold text-gray-900 mb-2">Panda Polarization-Maintaining Fiber Patch Cable SC/UPC 1m</h3>
             <button class="w-full py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-dark">Inquire</button>
           </div>
         </div>
@@ -216,7 +216,7 @@ const t = (key: string) => {
           </div>
           <div class="p-4">
             <div class="text-xs text-gray-400 font-mono mb-1">FL-PM-SS-2M</div>
-            <h3 class="font-bold text-gray-900 mb-2">Armored Panda PM Fiber Patch Cable 2m</h3>
+            <h3 class="font-bold text-gray-900 mb-2">Armored Panda Polarization-Maintaining Fiber Patch Cable 2m</h3>
             <button class="w-full py-2 bg-brand-blue text-white text-sm font-medium rounded hover:bg-brand-dark">Inquire</button>
           </div>
         </div>

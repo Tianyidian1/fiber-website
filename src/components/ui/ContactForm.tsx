@@ -18,7 +18,7 @@ const uiText = {
     email: 'Email Address *', emailPh: 'email@company.com',
     company: 'Company Name', companyPh: 'Your company (optional)',
     phone: 'Phone Number', phonePh: '+1-',
-    product: 'Product of Interest', productPh: 'e.g. Panda PM fiber patch cable LC/APC 1m',
+    product: 'Product of Interest', productPh: 'e.g. Panda Polarization-Maintaining Fiber Patch Cable LC/APC 1m',
     message: 'Message *', messagePh: 'Describe your requirements or questions...',
     submit: 'Send Message',
     sending: 'Sending...',

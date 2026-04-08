@@ -34,7 +34,7 @@ const uiText = {
     company: 'Company Name',
     companyPlaceholder: 'Your company name',
     product: 'Product Model / Interest',
-    productPlaceholder: 'e.g. LC/APC Panda PM fiber patch cable 2m',
+    productPlaceholder: 'e.g. LC/APC Panda Polarization-Maintaining Fiber Patch Cable 2m',
     message: 'Requirements *',
     messagePlaceholder: 'Please describe your requirements including quantity, spec details...',
     submit: 'Submit Inquiry',

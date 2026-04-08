@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/index';
@@ -9,9 +9,9 @@ const t = useTranslations(lang);
 const products = [
   {
     icon: '⚡',
-    nameZh: '保偏激光跳线 PM-LDC',
-    nameEn: 'PM Laser Delivery Cable PM-LDC',
-    model: 'FL-PM-LDC-1064',
+    nameZh: '保偏激光跳线 Polarization-Maintaining-LDC',
+    nameEn: 'Polarization-Maintaining Laser Delivery Cable Polarization-Maintaining-LDC',
+    model: 'FL-Polarization-Maintaining-LDC-1064',
     descZh: '专为1064nm激光系统设计，高消光比保偏，低损耗传输。',
     descEn: 'Designed for 1064nm laser systems with high ER PM and low-loss transmission.',
     specZh: { '工作波长': '1064nm', '消光比': '≥ 25dB', '功率承受': '≤ 1W CW', '连接器': 'FC/APC', '护套': '3.0mm 铠装' },
@@ -31,7 +31,7 @@ const products = [
   {
     icon: '💎',
     nameZh: '双窗口保偏跳线 DW-PM',
-    nameEn: 'Dual-Window PM Cable DW-PM',
+    nameEn: 'Dual-Window Polarization-Maintaining Cable DW-PM',
     model: 'FL-DW-PM-1310-1550',
     descZh: '同时支持1310nm和1550nm工作，适用于相干探测和光纤传感系统。',
     descEn: 'Supports both 1310nm and 1550nm, ideal for coherent detection and sensing.',
@@ -44,7 +44,7 @@ const products = [
 <Layout
   title={lang === 'en' ? 'Specialty Fiber Cables – FiberLink' : '特种应用跳线 – FiberLink'}
   description={lang === 'en'
-    ? 'Specialty PM laser delivery and high-power fiber cables for industrial and photonic applications.'
+    ? 'Specialty Polarization-Maintaining Laser delivery and high-power fiber cables for industrial and photonic applications.'
     : '特种保偏激光跳线和高功率传能光缆，适用于工业激光和光子学应用。'}
 >
   <Breadcrumb lang={lang} items={[{ label: lang === 'en' ? 'Products' : '产品', href: '/' }]} current={lang === 'en' ? 'Specialty Cables' : '特种应用跳线'} />
@@ -55,7 +55,7 @@ const products = [
         <span class="text-4xl">⚡</span>
         <div>
           <h1 class="text-3xl font-bold">{lang === 'en' ? 'Specialty Application Cables' : '特种应用跳线'}</h1>
-          <p class="text-orange-200 mt-1">{lang === 'en' ? 'PM Laser · High-Power Delivery · Custom Photonic Solutions' : '保偏激光 · 高功率传能 · 定制光子解决方案'}</p>
+          <p class="text-orange-200 mt-1">{lang === 'en' ? 'Polarization-Maintaining Laser · High-Power Delivery · Custom Photonic Solutions' : '保偏激光 · 高功率传能 · 定制光子解决方案'}</p>
         </div>
       </div>
     </div>

@@ -113,7 +113,7 @@ export const ui = {
     'nav.sample': 'Sample Request',
     
     // Product categories
-    'cat.pm': 'PM Patch Cords',
+    'cat.pm': 'Polarization-Maintaining Patch Cables',
     'cat.hd': 'High Density',
     'cat.test': 'Test Solutions',
     'cat.special': 'Specialty Cables',
