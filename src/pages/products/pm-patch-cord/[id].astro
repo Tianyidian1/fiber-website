@@ -52,6 +52,7 @@ export function getStaticPaths() {
       applications: ['coherent-comm', 'sensing', 'quantum', 'laser'],
       relatedProducts: ['pm-fc-pc-2m', 'pm-sc-apc-armored', 'pm-lc-fc-hybrid'],
       category: 'pm-patch-cord',
+      alibabaLink: 'https://alibaba.com/demo-product',
     },
     {
       id: 'pm-fc-pc-2m',
@@ -84,6 +85,7 @@ export function getStaticPaths() {
       applications: ['laser', 'sensing'],
       relatedProducts: ['pm-lc-apc-1m', 'pm-sc-apc-armored'],
       category: 'pm-patch-cord',
+      alibabaLink: '',
     },
     {
       id: 'pm-sc-apc-armored',
@@ -114,6 +116,7 @@ export function getStaticPaths() {
       applications: ['industrial', 'sensing'],
       relatedProducts: ['pm-lc-apc-1m', 'pm-fc-pc-2m'],
       category: 'pm-patch-cord',
+      alibabaLink: '',
     },
     {
       id: 'pm-lc-fc-hybrid',
@@ -142,6 +145,7 @@ export function getStaticPaths() {
       applications: ['lab', 'system-integration'],
       relatedProducts: ['pm-lc-apc-1m', 'pm-fc-pc-2m'],
       category: 'pm-patch-cord',
+      alibabaLink: '',
     },
   ];
 
@@ -270,12 +274,23 @@ const applicationLabels: Record<string, { zh: string; en: string }> = {
           >
             📧 {t('product.inquire')}
           </button>
-          <a
-            href={`mailto:info@fiberlink.com?subject=${encodeURIComponent(product.model + ' Inquiry')}`}
-            class="flex-1 btn-outline justify-center py-3.5 text-base"
-          >
-            📞 {lang === 'en' ? 'Email Directly' : '直接发邮件'}
-          </a>
+          {product.alibabaLink ? (
+            <a
+              href={product.alibabaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex-1 btn-outline justify-center py-3.5 text-base text-center inline-flex items-center"
+            >
+              🛒 {lang === 'en' ? 'Buy Now' : '立即订购'}
+            </a>
+          ) : (
+            <a
+              href={lang === 'en' ? '/en/contact' : '/contact'}
+              class="flex-1 btn-outline justify-center py-3.5 text-base text-center inline-flex items-center"
+            >
+              📞 {lang === 'en' ? 'Contact Us' : '联系我们'}
+            </a>
+          )}
         </div>
 
         <!-- Download -->

@@ -129,6 +129,12 @@ collections:
         required: false
         hint: "上传PDF后填写路径，例：/datasheets/FL-PM-LC-APC-1M.pdf"
 
+      - label: "阿里巴巴产品链接"
+        name: "alibabaLink"
+        widget: "string"
+        required: false
+        hint: "填写阿里巴巴/1688对应产品页面链接，留空则不显示'立即订购'按钮，例：https://detail.1688.com/offer/xxxxxxxx.html"
+
       - label: "排序权重"
         name: "sort_order"
         widget: "number"
@@ -157,6 +163,11 @@ collections:
           - { label: "Test Solutions", value: "test-solutions" }
           - { label: "Specialty", value: "specialty" }
       - { label: "Description (EN)", name: "description", widget: "markdown" }
+      - label: "Alibaba Product Link"
+        name: "alibabaLink"
+        widget: "string"
+        required: false
+        hint: "Alibaba/1688 product page URL. Leave empty to hide the 'Buy Now' button."
       - label: "Specifications"
         name: "specs"
         widget: "list"

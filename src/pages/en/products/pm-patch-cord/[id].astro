@@ -4,15 +4,15 @@ import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
 
 export async function getStaticPaths() {
   return [
-    { params: { id: 'fl-pm-lc-apc-1m' }, props: { model: 'FL-PM-LC-APC-1M', name: 'PM Patch Cord LC/APC 1m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Coherent Detection', 'Fiber Sensors', 'R&D Lab'] } },
-    { params: { id: 'fl-pm-sc-upc-2m' }, props: { model: 'FL-PM-SC-UPC-2M', name: 'PM Patch Cord SC/UPC 2m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 2.0mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Sensing Systems', 'Research'] } },
-    { params: { id: 'fl-pm-lc-upc-3m' }, props: { model: 'FL-PM-LC-UPC-3M', name: 'PM Patch Cord LC/UPC 3m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Optical Coherence Tomography', 'Lab Use'] } },
-    { params: { id: 'fl-pm-ss-1m' }, props: { model: 'FL-PM-SS-1M', name: 'Armored PM Patch Cord 1m', price: 'Inquiry', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'Stainless Steel', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Industrial Harsh Environment', 'Laser Processing', 'Rugged Applications'] } },
+    { params: { id: 'fl-pm-lc-apc-1m' }, props: { model: 'FL-PM-LC-APC-1M', name: 'PM Patch Cord LC/APC 1m', price: 'Inquiry', alibabaLink: 'https://alibaba.com/demo-product', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Coherent Detection', 'Fiber Sensors', 'R&D Lab'] } },
+    { params: { id: 'fl-pm-sc-upc-2m' }, props: { model: 'FL-PM-SC-UPC-2M', name: 'PM Patch Cord SC/UPC 2m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 2.0mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Sensing Systems', 'Research'] } },
+    { params: { id: 'fl-pm-lc-upc-3m' }, props: { model: 'FL-PM-LC-UPC-3M', name: 'PM Patch Cord LC/UPC 3m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.3dB', 'Return Loss': '>55dB', 'Extinction Ratio': '≥25dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'PVC 0.9mm', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Fiber Laser', 'Optical Coherence Tomography', 'Lab Use'] } },
+    { params: { id: 'fl-pm-ss-1m' }, props: { model: 'FL-PM-SS-1M', name: 'Armored PM Patch Cord 1m', price: 'Inquiry', alibabaLink: '', specs: { 'Insertion Loss': '<0.35dB', 'Return Loss': '>50dB', 'Extinction Ratio': '≥20dB', 'Fiber Type': 'PANDA PM', 'Jacket Material': 'Stainless Steel', 'Operating Temp': '-40°C ~ +85°C' }, applications: ['Industrial Harsh Environment', 'Laser Processing', 'Rugged Applications'] } },
   ];
 }
 
 const { id } = Astro.params;
-const { model, name, price, specs, applications } = Astro.props;
+const { model, name, price, alibabaLink, specs, applications } = Astro.props;
 
 const t = (key: string) => {
   const en: Record<string, string> = {
@@ -95,10 +95,27 @@ const t = (key: string) => {
 
         <button
           onclick={`document.dispatchEvent(new CustomEvent('open-inquiry',{detail:{product:'${model}'}}))`}
-          class="w-full py-3 bg-brand-blue text-white font-bold text-lg rounded hover:bg-brand-dark transition-colors"
+          class="w-full py-3 bg-brand-blue text-white font-bold text-lg rounded hover:bg-brand-dark transition-colors mb-3"
         >
           {t('inquire')}
         </button>
+        {alibabaLink ? (
+          <a
+            href={alibabaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-full py-3 border-2 border-brand-blue text-brand-blue font-bold text-lg rounded hover:bg-brand-blue hover:text-white transition-colors text-center block"
+          >
+            🛒 Buy Now
+          </a>
+        ) : (
+          <a
+            href="/en/contact"
+            class="w-full py-3 border-2 border-gray-300 text-gray-600 font-bold text-lg rounded hover:border-brand-blue hover:text-brand-blue transition-colors text-center block"
+          >
+            📞 Contact Us
+          </a>
+        )}
         <p class="text-xs text-gray-500 text-center mt-2">{t('inquiryDesc')}</p>
       </div>
     </div>
